@@ -120,7 +120,7 @@
     <string name="class_info_editor">ClassInfoEditor</string>
     <string name="text_preferences">TextPreferences</string>
     <string name="about">About</string>
-    <string name="about_content">Author:\n    959504432@qq.com\n</string>
+    <string name="about_content">Author:\n\n</string>
     <string name="replacing">Replacing...</string>
     <string name="searching">Searching...</string>
     <string name="from_start">FromStart</string>
