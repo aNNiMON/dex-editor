@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <item
+    android:id="@+id/add_method"
+    android:title="@string/add_method"
+    />
+    <item
+        android:id="@+id/search_in_methods"
+        android:title="@string/search"
+        >
+        <menu>
+            <item
+                android:id="@+id/search_string"
+                android:title="@string/search_string"
+                />
+            <item
+                android:id="@+id/search_method"
+                android:title="@string/search_method"
+                />
+            <item
+                android:id="@+id/search_field"
+                android:title="@string/search_field"
+                />
+        </menu>
+    </item>
+
+
+</menu>       
+ 

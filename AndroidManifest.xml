@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package  = "mao.bytecode"
+    android:versionCode="4"
+      android:versionName="1.3.0">
+      <application 
+          android:icon="@drawable/android"
+          android:label="@string/app_name">
+        <activity android:name=".FileBrowser"
+            android:configChanges="orientation|keyboardHidden"
+                  android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ZipEditor"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/zip_editor"
+            />
+        <activity android:name=".TextEditor"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/text_editor"
+            />
+        <activity android:name=".ClassListActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/class_editor"
+            />
+        <activity android:name=".ClassItemActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/class_item"
+            />
+        <activity android:name=".SearchClassesActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/search_class"
+            />
+        <activity android:name=".SearchMethodsActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/search_method"
+            />
+        <activity android:name=".FieldListActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/field_list"
+            />
+        <activity android:name=".FieldItemEditorActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/field_item_editor"
+            />
+        <activity android:name=".FieldItemNewActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/field_item_new"
+            />
+        <activity android:name=".MethodListActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/method_list"
+            />
+        <activity android:name=".CodeEditorActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/code_editor"
+            />
+        <activity android:name=".MethodItemEditorActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/method_item_editor"
+            />
+        <activity android:name=".MethodItemNewActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/method_item_new"
+            />
+        <activity android:name=".ClassInfoEditorActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/class_info_editor"
+            />
+        <activity android:name=".TextPreferences"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/text_preferences"
+            />
+
+    </application>
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+</manifest> 

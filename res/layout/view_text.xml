@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView 
+    android:id="@+id/scroll"
+    android:textColor="#ff000000" 
+    android:orientation="vertical"
+    android:background="#ffffffff"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+      <LinearLayout
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          android:id="@+id/linear"
+          android:orientation="vertical"
+          android:layout_width="fill_parent"
+          android:layout_height="fill_parent">
+ 
+          <EditText
+              android:textSize="14.0dip"
+              android:gravity="fill_horizontal"
+              android:id="@+id/txtEdit"
+              android:scrollbars="vertical"
+              android:autoText="false"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:capitalize="none" />
+      </LinearLayout>
+</ScrollView>
+

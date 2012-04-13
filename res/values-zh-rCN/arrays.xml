@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string-array name="dialog_menu">
+    <item>从系统打开</item>
+    <item>以文本编辑</item>
+    <item>删除</item>
+    <item>重命名</item>
+    <item>复制</item>
+    <item>剪切</item>
+    <item>权限</item>
+</string-array>
+
+<string-array name="search_mod">
+    <item>Search string in code</item>
+    <item>Search method in code</item>
+    <item>Search field in code</item>
+</string-array>
+
+<string-array name="entries_font_size_prefs">
+    <item>8 pt</item>
+    <item>10 pt</item>
+    <item>12 pt</item>
+    <item>14 pt</item>
+    <item>16 pt</item>
+    <item>18 pt</item>
+    <item>20 pt</item>
+</string-array>
+
+<string-array name="values_font_size_prefs">
+    <item>8</item>
+    <item>10</item>
+    <item>12</item>
+    <item>14</item>
+    <item>16</item>
+    <item>18</item>
+    <item>20</item>
+</string-array>
+
+
+<string-array name="entries_font_type_prefs">
+    <item>Monospace</item>
+    <item>Serif</item>
+    <item>Sans Serif</item>
+</string-array>
+
+<string-array name="values_font_type_prefs">
+    <item>Monospace</item>
+    <item>Serif</item>
+    <item>Sans Serif</item>
+</string-array>
+</resources>

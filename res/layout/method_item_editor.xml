@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+  >
+  
+  <LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+  >
+  <TextView
+    android:id="@+id/access_flags_view"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Accessflags:"
+    android:textSize="15dip" />
+<EditText
+    android:id="@+id/access_flags_edit"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="accessflags"
+    android:textSize="17dip" />
+
+</LinearLayout>
+
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+  >
+  <TextView
+    android:id="@+id/method_name_view"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="MethodName:"
+    android:textSize="15dip" />
+<EditText
+    android:id="@+id/method_name_edit"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="methodName"
+    android:textSize="17dip" />
+
+</LinearLayout>
+
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+  >
+  <TextView
+    android:id="@+id/method_descriptor_view"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Descriptor: "
+    android:textSize="15dip" />
+<EditText
+    android:id="@+id/method_descriptor_edit"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="descriptor"
+    android:textSize="17dip" />
+
+</LinearLayout>
+
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+  >
+  <TextView
+    android:id="@+id/register_count_view"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="RegisterCount: "
+    android:textSize="15dip" />
+<EditText
+    android:id="@+id/register_count_edit"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="registerCount"
+    android:textSize="17dip" />
+
+</LinearLayout>
+
+
+
+</LinearLayout>

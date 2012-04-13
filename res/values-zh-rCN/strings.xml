@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Dalvik字节码编辑器</string>
+    <string name="add_entry">添加文件</string>
+    <string name="save_file">保存</string>
+    <string name="options">操作</string>
+    <string name="folder_name">文件夹名</string>
+    <string name="add_folder">新建文件夹</string>
+    <string name="btn_ok">确定</string>
+    <string name="btn_cancel">取消</string>
+    <string name="btn_yes">是</string>
+    <string name="btn_no">否</string>
+    <string name="view">从系统打开</string>
+    <string name="signed">签名</string>
+    <string name="extract">解压</string>
+    <string name="extracting">解压中...</string>
+    <string name="extracted">已解压</string>
+    <string name="extract_all">解压</string>
+    <string name="extract_zip">解压zip</string>
+    <string name="extract_path_empty">解压路径为空.</string>
+    <string name="name_empty">名字为空.</string>
+    <string name="file_exists">文件 "\"%s\" 已存在.</string>
+    <string name="extract_path">解压路径</string>
+
+    <string name="rename">重命名</string>
+    <string name="cannot_rename">无法 重命名 \"%s\".</string>
+    <string name="delete">删除</string>
+    <string name="is_delete">是否要删除 %s ?</string>
+    <string name="deleted">已删除</string>
+    <string name="copy">复制</string>
+    <string name="copy_to">复制到剪切板\n</string>
+    <string name="copy_message">文件 %s 已存在. 是否覆盖?</string>
+    <string name="copy_exception">文件复制异常</string>
+    <string name="copy_nothing">无文件</string>
+    <string name="copy_exist">无法复制到当前目录</string>
+    <string name="copied">已复制</string>
+    <string name="over_write">覆盖</string>
+    <string name="cut">剪切</string>
+    <string name="cut_to">复制到剪切板\n</string>
+    <string name="paste">粘贴</string>
+    <string name="permission">权限</string>
+    <string name="file_browser">文件浏览</string>
+    <string name="directory_exists">文件夹 \"%s\" 已存在.</string>
+    <string name="directory_created">文件夹 \"%s\" 已创建.</string>
+    <string name="directory_cannot_create">无法创建文件夹 \"%s\".</string>
+    <string name="directory_empty">文件夹名字为空</string>
+    <string name="exit">退出</string>
+    <string name="wait">请稍等...</string>
+
+    <string name="add_method">添加方法</string>
+    <string name="add_field">添加域</string>
+    <string name="file_added">文件已添加</string>
+    <string name="save_code">保存代码</string>
+    <string name="save_dexfile">保存Dex</string>
+    <string name="save_text">保存文本</string>
+    <string name="saved">已保存</string>
+    <string name="method_editor">方法描述</string>
+    <string name="remove_method">删除方法</string>
+    <string name="remove_field">删除域</string>
+    <string name="rename_class">重命名类</string>
+    <string name="zip_editor_remove">删除</string>
+    <string name="zip_remove_progress">删除中...</string>
+    <string name="is_remove">是否删除 ?</string>
+    <string name="merger_dexfile">合并Dex</string>
+    <string name="remove_class">删除类</string>
+    <string name="write_zip">写入中...</string>
+    <string name="load_data">正在加载...</string>
+    <string name="signed_zip">签名中...</string>
+    <string name="string_pool">字符常量池</string>
+    <string name="replace_axml">替换xml中字符</string>
+    <string name="replace_src_view">搜索:</string>
+    <string name="replace_dst_view">替换为:</string>
+    <string name="replace">替换</string>
+    <string name="replace_count">替换次数: </string>
+    <string name="search_string">搜索字符串</string>
+    <string name="search_field">搜索域</string>
+    <string name="search_method">搜索方法</string>
+    <string name="search_name">名字: </string>
+    <string name="search_descriptor">类型描述: </string>
+    <string name="search">搜索</string>
+    <string name="search_class_name">所属类:</string>
+    <string name="search_name_empty">搜索字符为空.</string>
+    <string name="search_not_found">%s 没找到.</string>
+
+
+
+    <string name="prefs_text">文本编辑</string>
+    <string name="preferences">设置</string>
+    <string name="prompt">提示</string>
+    <string name="is_save">是否保存? </string>
+    <string name="saving">保存中...</string>
+    <string name="class_exists">类名 \"%s\" 已存在.</string>
+
+
+    <string name="line_wrap">自动换行</string>
+    <string name="line_wrap_summary">当文本太长时自动换行</string>
+
+    <string name="appearance">编辑界面</string>
+    <string name="font_type">字体</string>
+    <string name="font_type_summary">选择字体类型</string>
+    <string name="font_size">字体大小</string>
+    <string name="font_size_summary">选择字体大小</string>
+    <string name="font_color">字体颜色</string>
+    <string name="font_color_summary">选择字体颜色</string>
+    <string name="bg_color">背景色</string>
+    <string name="bg_color_summary">选择背景色</string>
+
+    <string name="zip_editor">Zip编辑</string>
+    <string name="text_editor">文本编辑</string>
+    <string name="class_editor">类编辑</string>
+    <string name="class_item">类</string>
+    <string name="search_class">搜索类结果</string>
+    <string name="field_list">域列表</string>
+    <string name="field_item_editor">域编辑</string>
+    <string name="field_item_new">新建域</string>
+    <string name="method_list">方法列表</string>
+    <string name="code_editor">代码编辑</string>
+    <string name="method_item_editor">方法编辑</string>
+    <string name="method_item_new">新建方法</string>
+    <string name="class_info_editor">类编辑</string>
+    <string name="text_preferences">文本设置</string>
+
+    <string name="about">关于</string>
+    <string name="about_content">作者:\n    959504432@qq.com\n</string>
+    <string name="replacing">替换中...</string>
+    <string name="searching">搜索中...</string>
+
+    <string name="from_start">从开始处</string>
+    <string name="choose_color">选则颜色</string>
+    <string name="ignore_name_descriptor">忽略名字与描述符</string>
+    <string name="ignore_descriptor">忽略描述符</string>
+
+</resources>

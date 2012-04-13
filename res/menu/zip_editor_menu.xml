@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <item
+    android:id="@+id/add_entry"
+    android:title="@string/add_entry"
+    />
+    <item
+        android:id="@+id/save_file"
+        android:title="@string/save_file"
+        >
+    </item>
+    <item
+        android:id="@+id/replace_axml"
+        android:title="@string/replace_axml"
+        />
+    <!--
+<item
+        android:id="@+id/d"
+        android:title="d"
+        />
+<item
+        android:id="@+id/e"
+        android:title="e"
+        />
+<item
+        android:id="@+id/f"
+        android:title="f"
+        />
+-->
+</menu>       
+ 

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+  <ImageView android:id="@+id/icon"
+      android:layout_width="48.0dip"
+      android:layout_height="48.0dip"
+      android:layout_marginRight="2.0dip" />
+  <TextView android:textSize="17.0dip"
+      android:gravity="center_vertical"
+      android:id="@+id/text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Text"
+      android:layout_weight="2.5"
+      android:layout_toRightOf="@+id/icon"
+      />
+  <TextView android:textSize="12.0dip"
+      android:gravity="center_vertical"
+      android:id="@+id/permissions"
+      android:layout_width="wrap_content"
+      android:layout_height="fill_parent"
+      android:layout_marginRight="6.0dip"
+      android:text="Permissions"
+      android:layout_toRightOf="@+id/icon"
+      android:layout_below="@+id/text"
+      />
+  <TextView android:textSize="12.0dip"
+      android:gravity="center_vertical"
+      android:id="@+id/times"
+      android:layout_width="wrap_content"
+      android:layout_height="fill_parent"
+      android:layout_marginRight="6.0dip"
+      android:text="time"
+      android:layout_toRightOf="@+id/permissions"
+      android:layout_below="@+id/text"
+      />
+  <TextView android:textSize="12.0dip"
+      android:gravity="center_vertical"
+      android:id="@+id/size"
+      android:layout_width="wrap_content"
+      android:layout_height="fill_parent"
+      android:layout_marginRight="6.0dip"
+      android:text="Size"
+      android:layout_toRightOf="@+id/times"
+      android:layout_below="@+id/text"
+      />
+</RelativeLayout>

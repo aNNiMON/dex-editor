@@ -1,0 +1,5 @@
+tags
+bin/
+gen/
+dexlib/bin/
+*.swp

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen  
+	xmlns:android="http://schemas.android.com/apk/res/android">  
+    <PreferenceCategory android:title="@string/prefs_text">  
+		<CheckBoxPreference  
+			android:key="linewrap"  
+            android:title="@string/line_wrap"  
+            android:summary="@string/line_wrap_summary" 
+			android:defaultValue="false" />  
+    </PreferenceCategory>
+		
+    <PreferenceCategory android:title="@string/appearance">  
+		<ListPreference
+			android:key="fonttype"  
+            android:title="@string/font_type"  
+            android:summary="@string/font_type_summary"  
+            android:dialogTitle="@string/font_type_summary" 
+			android:defaultValue="Sans Serif" 
+            android:entries="@array/entries_font_type_prefs"
+            android:entryValues="@array/values_font_type_prefs"
+            />
+		<ListPreference
+			android:key="fontsize"  
+            android:title="@string/font_size"
+            android:summary="@string/font_size_summary"  
+			android:defaultValue="14"
+            android:dialogTitle="@string/font_size_summary"
+            android:entries="@array/entries_font_size_prefs"
+            android:entryValues="@array/values_font_size_prefs"
+            />
+		<mao.bytecode.ColorPreference
+			android:key="fontcolor"  
+            android:title="@string/font_color"
+            android:summary="@string/font_color_summary"  
+			android:defaultValue="0xFF000000"
+			android:dialogTitle="@string/font_color_summary" />
+		<mao.bytecode.ColorPreference
+			android:key="bgcolor"
+            android:title="@string/bg_color"
+            android:summary="@string/bg_color_summary"  
+			android:defaultValue="0xFFCCCCCC"
+			android:dialogTitle="@string/bg_color_summary" />
+	</PreferenceCategory>
+ 
+</PreferenceScreen>  

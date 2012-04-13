@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView 
+    android:id="@+id/scroll"
+    android:textColor="#ff000000" 
+    android:orientation="vertical"
+    android:background="#ffffffff"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditText 
+        android:textSize="17.0dip"
+        android:gravity="top"
+        android:id="@+id/code_edit"
+        android:scrollbars="vertical"
+        android:autoText="false"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:capitalize="none" />
+</ScrollView>
+
