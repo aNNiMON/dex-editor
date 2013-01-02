@@ -38,6 +38,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Set;
@@ -214,9 +215,29 @@ public class ZipEditor extends ListActivity {
                     }
                 }).start();
 
+            } else if(isImageType(file)){
+                new Thread(new Runnable(){
+                    public void run(){
+                        mHandler.sendEmptyMessage(LOADING);
+                        openImageFile(file);
+                        //dismissDialog 
+                        mHandler.sendEmptyMessage(R.string.load_data);
+                    }
+                }).start();
+
             }
         }
 
+    private boolean isImageType(String file) {
+        final String[] extentions = {".png", ".jpg", ".jpeg", ".bmp", ".gif"};
+        
+        String name = file.toLowerCase(Locale.ENGLISH);
+        for (String ext : extentions) {
+            if (name.endsWith(ext)) return true;
+        }
+        
+        return false;
+    }
 
     private void resultToFileBrowser(){
         Intent intent=new Intent();
@@ -234,6 +255,20 @@ public class ZipEditor extends ListActivity {
             Message msg=new Message();
             msg.what=ERROR;
             msg.obj=e.getMessage();
+            mHandler.sendMessage(msg);
+        }
+    }
+    
+    private void openImageFile(String file){
+        try {
+            byte[] data = readEntry(file);
+            Intent intent=new Intent(this, ImageViewer.class);
+            intent.putExtra(ImageViewer.DATA_EXTRA, data);
+            startActivityForResult(intent,R.layout.zip_list_item);
+        } catch(Exception e) {
+            Message msg = new Message();
+            msg.what = ERROR;
+            msg.obj = e.getMessage();
             mHandler.sendMessage(msg);
         }
     }

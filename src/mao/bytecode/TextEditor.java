@@ -35,6 +35,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 
 import android.preference.PreferenceManager;
+import mao.layoutviewer.LayoutViewer;
 import mao.res.*;
 
 import mao.util.StringUtils;
@@ -45,6 +46,8 @@ public class TextEditor extends Activity {
     public static final int TOAST=2;
     public static final String PLUGIN="plugin";
     public static final String DATA="data";
+    
+    private static final int LAYOUT_VIEWER = 119;
 
     Edit edit;
     EditText text;
@@ -54,6 +57,7 @@ public class TextEditor extends Activity {
     private String content;
     private boolean isChanged=false;
     private boolean noText=false;
+    private boolean isXml = false;
 
     public static  String searchString="";
     public static  String replaceString="";
@@ -253,7 +257,10 @@ public class TextEditor extends Activity {
 
 
     private void load(String name){
+        this.setTitle(name);
         //toast(name);
+        isXml = "AXmlEditor".equals(name);
+        
         if("ARSCEditor".equals(name)){
             isViewText=false;
             edit=new ARSCEditor();
@@ -290,6 +297,9 @@ public class TextEditor extends Activity {
         in.inflate(R.menu.text_editor_menu,m);
         if(noText){
             m.removeItem(R.id.save);
+        }
+        if (isXml) {
+            m.add(0, LAYOUT_VIEWER, 0, R.string.layout_viewer);
         }
         return true;
     }
@@ -345,6 +355,15 @@ public class TextEditor extends Activity {
             case R.id.search_string:
                 searchString();
                 break;
+                
+            case LAYOUT_VIEWER:
+                {
+                    Intent intent = new Intent(this, LayoutViewer.class);
+                    intent.putExtra(LayoutViewer.DATA_EXTRA, TextEditor.data);
+                    startActivity(intent);
+                }
+                break;
+                
             case R.id.preferences:
                 {
                     Intent intent=new Intent(this,TextPreferences.class);

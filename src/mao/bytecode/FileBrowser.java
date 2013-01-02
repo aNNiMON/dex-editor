@@ -53,7 +53,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import android.util.DisplayMetrics;
 import android.util.*;
 
 import dalvik.system.VMRuntime;
@@ -78,6 +77,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Vector;
 import java.util.Stack;
 import java.util.Collections;
@@ -379,6 +379,25 @@ public class FileBrowser extends ListActivity {
         }).start();
     }
 
+    private void openImageFile(final File file) {
+        new Thread(new Runnable(){
+            public void run(){
+                mHandler.sendEmptyMessage(SHOWPROGRESS);
+                
+                try {
+                    Intent intent = new Intent(FileBrowser.this, ImageViewer.class);
+                    intent.putExtra(ImageViewer.FILE_PATH_EXTRA, file.getAbsolutePath());
+                    startActivityForResult(intent, R.layout.list_item_details);
+                } catch(Exception e) {
+                    Message msg=new Message();
+                    msg.what=SHOWMESSAGE;
+                    msg.obj="Open image exception "+e.getMessage();
+                    mHandler.sendMessage(msg);
+                }
+                mHandler.sendEmptyMessage(DISMISSPROGRESS);
+            }
+        }).start();
+    }
 
 
 
@@ -447,7 +466,16 @@ public class FileBrowser extends ListActivity {
         return false;
     }
 
-
+    private boolean isImageType(String file) {
+        final String[] extentions = {".png", ".jpg", ".jpeg", ".bmp", ".gif"};
+        
+        String name = file.toLowerCase(Locale.ENGLISH);
+        for (String ext : extentions) {
+            if (name.endsWith(ext)) return true;
+        }
+        
+        return false;
+    }
 
 
     @Override
@@ -904,22 +932,23 @@ public class FileBrowser extends ListActivity {
                 resultFileToZipEditor(file);
                 return;
             }
-            if(isZip(file)){
+            if(isZip(file)) {
                 openApk(file);
-            }else if(name.endsWith(".arsc")){
+            } else if(name.endsWith(".arsc")) {
                 editArsc(file);
-            }else if(name.endsWith(".xml")){
+            } else if(name.endsWith(".xml")) {
                 editAxml(file);
-            }else if(name.endsWith(".txt")
-                    ||name.endsWith(".java")
-                    ||name.endsWith(".py")){
+            } else if (name.endsWith(".txt")
+                    || name.endsWith(".java")
+                    || name.endsWith(".py")) {
                 editText(file);
-                    }
-            else if(name.endsWith(".dex")){
+            } else if(name.endsWith(".dex")) {
                 openDexFile(file);
-            }else{
+            } else if(isImageType(file.getName())){
+                openImageFile(file);
+            } else {
                 dialogMenu();
-            }
+            } 
         }
 
 
@@ -1261,8 +1290,7 @@ public class FileBrowser extends ListActivity {
                     }
                 });
                 icon.setImageDrawable(drawable);
-            }else if(name.endsWith(".png")
-                    ||name.endsWith(".jpg")){
+            }else if(isImageType(name)){
 
                 icon.setImageResource(R.drawable.image);
             }else if(name.endsWith(".zip")

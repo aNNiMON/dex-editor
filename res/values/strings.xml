@@ -105,6 +105,7 @@
     <string name="bg_color">Background Color</string>
     <string name="bg_color_summary">Choose a background color</string>
 
+    <string name="layout_viewer">LayoutViewer</string>
     <string name="zip_editor">ZipEditor</string>
     <string name="text_editor">TextEditor</string>
     <string name="class_editor">ClassEditor</string>

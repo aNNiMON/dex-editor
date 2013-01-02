@@ -105,6 +105,7 @@
     <string name="bg_color">背景色</string>
     <string name="bg_color_summary">选择背景色</string>
 
+    <string name="layout_viewer">布局浏览器</string>
     <string name="zip_editor">Zip编辑</string>
     <string name="text_editor">文本编辑</string>
     <string name="class_editor">类编辑</string>

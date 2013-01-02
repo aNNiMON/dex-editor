@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
     <item
-    android:id="@+id/save"
-    android:title="@string/save_text"
-    >
+        android:id="@+id/save"
+        android:title="@string/save_text">
     </item>
     <item
-    android:id="@+id/search_string"
-    android:title="@string/search_string"
-    >
+        android:id="@+id/search_string"
+        android:title="@string/search_string">
     </item>
     <item
-    android:id="@+id/preferences"
-    android:title="@string/preferences"
-    >
+        android:id="@+id/preferences"
+        android:title="@string/preferences">
     </item>
     <item
         android:id="@+id/exit"
-        android:title="@string/exit"
-        >
+        android:title="@string/exit">
     </item>
-</menu>       
- 
+
+</menu>
