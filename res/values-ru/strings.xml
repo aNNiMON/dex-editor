@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Dalvik Bytecode Editor</string>
+    <string name="add_entry">Добавить файл</string>
+    <string name="save_file">Сохранить</string>
+    <string name="options">Опции</string>
+    <string name="folder_name">Имя папки</string>
+    <string name="add_folder">Добавить папку</string>
+    <string name="btn_ok">Ок</string>
+    <string name="btn_cancel">Отмена</string>
+    <string name="btn_yes">Да</string>
+    <string name="btn_no">Нет</string>
+    <string name="view">Просмотр</string>
+    <string name="signed">Подписать</string>
+    <string name="extract">Извлечь</string>
+    <string name="extracting">Распаковка…</string>
+    <string name="extracted">Распаковано</string>
+    <string name="extract_all">Извлечь всё</string>
+    <string name="extract_zip">Извлечь Zip</string>
+    <string name="extract_path_empty">Путь распаковки пуст.</string>
+    <string name="name_empty">Нет имени.</string>
+    <string name="file_exists">Файл "\"%s\" уже существует.</string>
+    <string name="extract_path">Путь</string>
+    
+    <string name="rename">Переименовать</string>
+    <string name="cannot_rename">Не удалось переименовать \"%s\".</string>
+    <string name="delete">Удалить</string>
+    <string name="is_delete">Действительно удалить %s ?</string>
+    <string name="deleted">Удалено</string>
+    <string name="copy">Копировать</string>
+    <string name="copy_to">Скопировано в буфер обмена\n</string>
+    <string name="copy_message">Файл %s уже существует. Заменить?</string>
+    <string name="copy_exception">Исключение</string>
+    <string name="copy_nothing">Нечего копировать</string>
+    <string name="copy_exist">Копия ещё не создана…</string>
+    <string name="copied">Скопировано</string>
+    <string name="over_write">Заменить</string>
+    <string name="cut">Вырезать</string>
+    <string name="cut_to">Вырезано в буфер обмена\n</string>
+    <string name="paste">Вставить</string>
+    <string name="permission">Права доступа</string>
+    <string name="file_browser">Файлы</string>
+    <string name="directory_exists">Папка \"%s\" уже существует.</string>
+    <string name="directory_created">Папка \"%s\" создана.</string>
+    <string name="directory_cannot_create">Не удалось создать папку \"%s\".</string>
+    <string name="directory_empty">Пустое имя папки.</string>
+    <string name="exit">Выход</string>
+    <string name="wait">Пожалуйста, подождите…</string>
+
+    <string name="add_method">Добавить метод</string>
+    <string name="add_field">Добавить поле</string>
+    <string name="file_added">Файл добавлен</string>
+    <string name="save_code">Сохранить</string>
+    <string name="save_dexfile">Сохранить Dex</string>
+    <string name="save_text">Сохранить</string>
+    <string name="saved">Сохранено</string>
+    <string name="method_editor">Редактор методов</string>
+    <string name="remove_method">Удалить метод</string>
+    <string name="remove_field">Удалить поле</string>
+    <string name="rename_class">Переименовать класс</string>
+    <string name="zip_editor_remove">Удалить</string>
+    <string name="zip_remove_progress">Удаление…</string>
+    <string name="is_remove">Действительно удалить?</string>
+    <string name="merger_dexfile">Объединить Dex файлы</string>
+    <string name="remove_class">Удалить класс</string>
+    <string name="write_zip">Запись…</string>
+    <string name="load_data">Загрузка…</string>
+    <string name="signed_zip">Подпись…</string>
+    <string name="string_pool">Строковый пул</string>
+    <string name="replace_axml">Замена Axml</string>
+    <string name="replace_src_view">Найти:</string>
+    <string name="replace_dst_view">Заменить:</string>
+    <string name="replace">Замена</string>
+    <string name="replace_count">заменено: </string>
+    <string name="search_string">Поиск строки</string>
+    <string name="search_field">Поиск поля</string>
+    <string name="search_method">Поиск метода</string>
+    <string name="search_name">Имя: </string>
+    <string name="search_descriptor">Дескриптор: </string>
+    <string name="search">Поиск</string>
+    <string name="search_class_name">Содержимое класса:</string>
+    <string name="search_name_empty">Пустое имя для поиска.</string>
+    <string name="search_not_found">%s не найдено.</string>
+
+
+
+    <string name="prefs_text">Настройки редактора</string>
+    <string name="preferences">Настройки</string>
+    <string name="prompt">Внимание</string>
+    <string name="is_save">Сохранить? </string>
+    <string name="saving">Сохранение…</string>
+    <string name="class_exists">Класс \"%s\" уже существует.</string>
+
+
+    <string name="line_wrap">Перенос строк</string>
+    <string name="line_wrap_summary">Переносить длинные строки</string>
+
+    <string name="appearance">Вид</string>
+    <string name="font_type">Шрифт</string>
+    <string name="font_type_summary">Выберите шрифт</string>
+    <string name="font_size">Размер шрифта</string>
+    <string name="font_size_summary">Выберите размер шрифта</string>
+    <string name="font_color">Цвет шрифта</string>
+    <string name="font_color_summary">Выберите цвет шрифта</string>
+    <string name="bg_color">Цвет фона</string>
+    <string name="bg_color_summary">Выберите цвет фона</string>
+
+    <string name="layout_viewer">Просмотр разметки</string>
+    <string name="zip_editor">Zip редактор</string>
+    <string name="text_editor">Редактор текста</string>
+    <string name="class_editor">Редактор классов</string>
+    <string name="class_item">Пункт класса</string>
+    <string name="search_class">Поиск классов</string>
+    <string name="field_list">Список полей</string>
+    <string name="field_item_editor">Редактор полей</string>
+    <string name="field_item_new">Добавить поле</string>
+    <string name="method_list">Список методов</string>
+    <string name="code_editor">Редактор кода</string>
+    <string name="method_item_editor">Редактор методов</string>
+    <string name="method_item_new">Добавить метод</string>
+    <string name="class_info_editor">Редактор ClassInfo</string>
+    <string name="text_preferences">Настройки текста</string>
+    <string name="about">О программе</string>
+    <string name="about_content">Автор:\n\n</string>
+    <string name="replacing">Замена…</string>
+    <string name="searching">Поиск…</string>
+    <string name="from_start">Сначала</string>
+    <string name="choose_color">Выберите цвет</string>
+    <string name="ignore_name_descriptor">Игнорировать имя и дескриптор</string>
+    <string name="ignore_descriptor">Игнорировать дескриптор</string>
+</resources>

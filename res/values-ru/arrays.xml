@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string-array name="dialog_menu">
+    <item>Просмотр</item>
+    <item>Открыть как текст</item>
+    <item>Удалить</item>
+    <item>Переименовать</item>
+    <item>Копировать</item>
+    <item>Вырезать</item>
+    <item>Разрешения</item>
+</string-array>
+
+<string-array name="search_mod">
+    <item>Поиск строки</item>
+    <item>Поиск метода</item>
+    <item>Поиск поля</item>
+</string-array>
+
+<string-array name="entries_font_size_prefs">
+    <item>8 pt</item>
+    <item>10 pt</item>
+    <item>12 pt</item>
+    <item>14 pt</item>
+    <item>16 pt</item>
+    <item>18 pt</item>
+    <item>20 pt</item>
+</string-array>
+
+<string-array name="values_font_size_prefs">
+    <item>8</item>
+    <item>10</item>
+    <item>12</item>
+    <item>14</item>
+    <item>16</item>
+    <item>18</item>
+    <item>20</item>
+</string-array>
+
+
+<string-array name="entries_font_type_prefs">
+    <item>Monospace</item>
+    <item>Serif</item>
+    <item>Sans Serif</item>
+</string-array>
+
+<string-array name="values_font_type_prefs">
+    <item>Monospace</item>
+    <item>Serif</item>
+    <item>Sans Serif</item>
+</string-array>
+</resources>
