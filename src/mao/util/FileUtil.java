@@ -39,18 +39,7 @@ public final class FileUtil {
         // This space intentionally left blank.
     }
 
-    /**
-     * Reads the named file, translating {@link IOException} to a
-     * {@link RuntimeException} of some sort.
-     *
-     * @param fileName non-null; name of the file to read
-     * @return non-null; contents of the file
-     */
-    public static byte[] readFile(String fileName)
-            throws IOException {
-        File file = new File(fileName);
-        return readFile(file);
-    }
+    
 
     /**
      * Reads the given file, translating {@link IOException} to a
@@ -74,7 +63,7 @@ public final class FileUtil {
      * end of the file
      * @return non-null; contents of the file
      */
-    public static byte[] readFile(File file, int offset, int length)
+    private static byte[] readFile(File file, int offset, int length)
             throws IOException {
         if (!file.exists()) {
             throw new RuntimeException(file + ": file not found");
@@ -120,7 +109,7 @@ public final class FileUtil {
         return result;
     }
 
-    public static byte[] readStream(InputStream in, int length)
+    private static byte[] readStream(InputStream in, int length)
             throws IOException {
         byte[] result = new byte[length];
         int at=0;

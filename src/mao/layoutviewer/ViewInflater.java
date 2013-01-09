@@ -1,7 +1,6 @@
 package mao.layoutviewer;
 
 import java.io.IOException;
-import java.io.StringReader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Hashtable;
@@ -10,7 +9,6 @@ import java.util.Stack;
 import mao.bytecode.R;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.content.Context;
 import android.text.method.PasswordTransformationMethod;
@@ -35,20 +33,6 @@ public class ViewInflater {
         this.ids = new Hashtable<String, Integer>();
         this.context = context;
         this.idIndex = 0;
-    }
-
-    public View inflate(String text) {
-        XmlPullParser parse;
-        try {
-            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-            parse = factory.newPullParser();
-            parse.setInput(new StringReader(text));
-            return inflate(parse);
-        } catch (XmlPullParserException ex) {
-            return null;
-        } catch (IOException ex) {
-            return null;
-        }
     }
 
     public View inflate(XmlPullParser parse) throws XmlPullParserException, IOException {

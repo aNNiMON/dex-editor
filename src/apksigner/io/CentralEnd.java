@@ -20,11 +20,11 @@ import java.io.IOException;
 
 public class CentralEnd 
 {
-    public int signature = 0x06054b50; // end of central dir signature    4 bytes
-    public short numberThisDisk = 0;   // number of this disk             2 bytes     
-    public short centralStartDisk = 0; // number of the disk with the start of the central directory  2 bytes
-    public short numCentralEntries;    // total number of entries in the central directory on this disk  2 bytes
-    public short totalCentralEntries;  // total number of entries in the central directory           2 bytes
+    private int signature = 0x06054b50; // end of central dir signature    4 bytes
+    private short numberThisDisk = 0;   // number of this disk             2 bytes     
+    private short centralStartDisk = 0; // number of the disk with the start of the central directory  2 bytes
+    short numCentralEntries;    // total number of entries in the central directory on this disk  2 bytes
+    short totalCentralEntries;  // total number of entries in the central directory           2 bytes
 
     public int centralDirectorySize;   // size of the central directory   4 bytes
     public int centralStartOffset;     // offset of start of central directory with respect to the starting disk number        4 bytes

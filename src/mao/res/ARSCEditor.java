@@ -3,9 +3,6 @@ package mao.res;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.OutputStream;
 import java.io.IOException;
@@ -31,16 +28,6 @@ public class ARSCEditor implements Edit{
             list.add(str);
         }
         arsc.write(list,out);
-    }
-
-
-    private static FileOutputStream getOutputStream(String name)throws IOException{
-        File f=new File(name);
-        if(f.exists()){
-            f.delete();
-            f.createNewFile();
-        }
-        return new FileOutputStream(f);
     }
 
 }

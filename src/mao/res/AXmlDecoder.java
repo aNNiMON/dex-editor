@@ -12,7 +12,7 @@ public class AXmlDecoder{
     private static final int AXML_CHUNK_TYPE=0x00080003;
     public StringBlock mTableStrings;
     private final LEDataInputStream mIn;
-    ByteArrayOutputStream byteOut=new ByteArrayOutputStream();
+    private ByteArrayOutputStream byteOut=new ByteArrayOutputStream();
 
     private void readStrings() throws IOException{
         int type=mIn.readInt();
@@ -41,7 +41,7 @@ public class AXmlDecoder{
     }
 
 
-    public void write(List<String> list,LEDataOutputStream out)throws IOException{
+    private void write(List<String> list,LEDataOutputStream out)throws IOException{
         ByteArrayOutputStream baos=new ByteArrayOutputStream();
         LEDataOutputStream buf=new LEDataOutputStream(baos);
         mTableStrings.write(list,buf);

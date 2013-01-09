@@ -1,13 +1,7 @@
-/*
- * aNNiMON 2012
- * For more info visit http://annimon.com/
- */
 package mao.layoutviewer;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 
@@ -17,19 +11,11 @@ import java.nio.charset.Charset;
  */
 public class AndroidXml {
     
-    public static final byte XML = 0, AXML = 1;
+    private static final byte XML = 0, AXML = 1;
     private static final int AXML_FILE_SIGNATURE = 0x03000800;
 
     private byte xmlType;
     private ByteArrayInputStream bais;
-    
-    public static AndroidXml readFromStream(InputStream is) throws IOException {
-        byte[] data = readData(is);
-        
-        AndroidXml androidXml = new AndroidXml(data);
-        androidXml.readXmlType(data);
-        return androidXml;
-    }
     
     public static AndroidXml readFromArray(byte[] data) throws IOException {
         AndroidXml androidXml = new AndroidXml(data);
@@ -80,19 +66,5 @@ public class AndroidXml {
                     (data[2] << 8) |
                     (data[3]);
         return value;
-    }
-    
-    private static byte[] readData(InputStream is) throws IOException {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        int length;
-        byte[] buffer = new byte[1024];
-        while ( (length = is.read(buffer)) != -1 ) {
-            baos.write(buffer, 0, length);
-        }
-        is.close();
-        baos.flush();
-        buffer = baos.toByteArray();
-        baos.close();
-        return buffer;
     }
 }

@@ -2,14 +2,10 @@ package mao.res;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.CharBuffer;
 import java.nio.charset.CharacterCodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
-import java.nio.charset.CharsetEncoder;
 import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.io.ByteArrayOutputStream;
 
 import mao.util.LEDataInputStream;
@@ -20,7 +16,7 @@ import org.jf.dexlib.Util.Utf8Utils;
 public class StringBlock
 {
     private int[] m_stringOffsets;
-    byte[] m_strings;
+    private byte[] m_strings;
     private int[] m_styleOffsets;
     private int[] m_styles;
     private boolean m_isUTF8;
@@ -32,13 +28,10 @@ public class StringBlock
 
 
     private static final CharsetDecoder UTF16LE_DECODER = Charset.forName("UTF-16LE").newDecoder();
-    private static final CharsetEncoder UTF16LE_ENCODER = Charset.forName("UTF-16LE").newEncoder();
-
     private static final CharsetDecoder UTF8_DECODER = Charset.forName("UTF-8").newDecoder();
-    private static final CharsetEncoder UTF8_ENCODER = Charset.forName("UTF-8").newEncoder();
-
-    public static final int CHUNK_STRINGBLOCK=1835009;
-    public static final int IS_UTF8=0x100;
+    
+    private static final int CHUNK_STRINGBLOCK=1835009;
+    private static final int IS_UTF8=0x100;
 
     public static StringBlock read(LEDataInputStream reader)
         throws IOException
@@ -95,13 +88,6 @@ public class StringBlock
         int size=getSize();
         for(int i=0;i<size;i++)
             list.add(Utf8Utils.escapeString(getString(i)));
-    }
-
-
-    public void write(LEDataOutputStream out)throws IOException{
-        List<String> list=new ArrayList<String>(getSize());
-        getStrings(list);
-        write(list,out);
     }
 
 
@@ -176,7 +162,7 @@ public class StringBlock
         return chunkSize;
     }
 
-    public String getString(int index)
+    private String getString(int index)
     {
         if ((index < 0) || (this.m_stringOffsets == null) || (index >= this.m_stringOffsets.length))
         {
@@ -199,124 +185,6 @@ public class StringBlock
 
     public int getSize(){
         return m_stringOffsets!=null?m_stringOffsets.length:0;
-    }
-
-
-    public String getHTML(int index)
-    {
-        String raw = getString(index);
-        if (raw == null) {
-            return raw;
-        }
-        int[] style = getStyle(index);
-        if (style == null) {
-            return raw;
-        }
-        StringBuilder html = new StringBuilder(raw.length() + 32);
-        int[] opened = new int[style.length / 3];
-        int offset = 0; int depth = 0;
-        while (true) {
-            int i = -1;
-            int j=0;
-            for (; j != style.length; j += 3) {
-                if (style[(j + 1)] == -1) {
-                    continue;
-                }
-                if ((i == -1) || (style[(i + 1)] > style[(j + 1)])) {
-                    i = j;
-                }
-            }
-            int start = i != -1 ? style[(i + 1)] : raw.length();
-            for (j = depth - 1; j >= 0; j--) {
-                int last = opened[j];
-                int end = style[(last + 2)];
-                if (end >= start) {
-                    break;
-                }
-                if (offset <= end) {
-                    html.append(raw.substring(offset, end + 1));
-
-                    offset = end + 1;
-                }
-                outputStyleTag(getString(style[last]), html, true);
-            }
-            depth = j + 1;
-            if (offset < start) {
-                html.append(raw.substring(offset, start));
-
-                offset = start;
-            }
-            if (i == -1) {
-                break;
-            }
-            outputStyleTag(getString(style[i]), html, false);
-            style[(i + 1)] = -1;
-            opened[(depth++)] = i;
-        }
-        return html.toString();
-    }
-
-
-    private void outputStyleTag(String tag, StringBuilder builder, boolean close)
-    {
-        builder.append('<');
-        if (close) {
-            builder.append('/');
-        }
-
-        int pos = tag.indexOf(';');
-        if (pos == -1) {
-            builder.append(tag);
-        } else {
-            builder.append(tag.substring(0, pos));
-            if (!close) {
-                boolean loop = true;
-                while (loop) {
-                    int pos2 = tag.indexOf('=', pos + 1);
-                    builder.append(' ').append(tag.substring(pos + 1, pos2)).append("=\"");
-
-                    pos = tag.indexOf(';', pos2 + 1);
-                    String val;
-                    if (pos != -1) {
-                        val = tag.substring(pos2 + 1, pos);
-                    } else {
-                        loop = false;
-                        val = tag.substring(pos2 + 1);
-                    }
-
-                    builder.append(val).append('"');
-                }
-            }
-        }
-
-        builder.append('>');
-    }
-
-    private int[] getStyle(int index)
-    {
-        if ((this.m_styleOffsets == null) || (this.m_styles == null) || (index >= this.m_styleOffsets.length))
-        {
-            return null;
-        }
-        int offset = this.m_styleOffsets[index] / 4;
-
-        int count = 0;
-        for (int i = offset; (i < this.m_styles.length) && 
-                (this.m_styles[i] != -1); i++)
-        {
-            count++;
-        }
-        if ((count == 0) || (count % 3 != 0)) {
-            return null;
-        }
-        int[] style = new int[count];
-
-        int i = offset; for (int j = 0; (i < this.m_styles.length) && 
-                (this.m_styles[i] != -1); )
-        {
-            style[(j++)] = this.m_styles[(i++)];
-        }
-        return style;
     }
 
     private String decodeString(int offset, int length) {

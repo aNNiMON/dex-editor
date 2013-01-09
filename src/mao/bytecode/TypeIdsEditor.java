@@ -3,13 +3,10 @@ package mao.bytecode;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.io.IOException;
 import java.io.OutputStream;
 
 import org.jf.dexlib.*;
-import org.jf.dexlib.Code.*;
-import org.jf.dexlib.Code.Format.*;
 import org.jf.dexlib.Util.*;
 
 

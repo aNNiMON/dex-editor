@@ -1,28 +1,23 @@
 package mao.bytecode;
 
-import android.widget.EditText;
-import android.os.Bundle;
+import org.jf.dexlib.Util.Utf8Utils;
 import android.content.Context;
-import android.util.AttributeSet;
-import android.view.KeyEvent;
-import android.view.View;
-import android.util.Log;
-import android.text.method.KeyListener;
+import android.os.Bundle;
 import android.text.ClipboardManager;
+import android.text.Editable;
+import android.text.NoCopySpan;
 import android.text.Selection;
 import android.text.Spannable;
-import android.text.NoCopySpan;
-import android.text.Editable;
-import android.text.method.MetaKeyKeyListener;
 import android.text.method.TransformationMethod;
-
-import android.view.inputmethod.InputConnection;
-import android.view.inputmethod.EditorInfo;
+import android.util.AttributeSet;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.inputmethod.CompletionInfo;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.ExtractedText;
 import android.view.inputmethod.ExtractedTextRequest;
-
-import org.jf.dexlib.Util.Utf8Utils;
+import android.view.inputmethod.InputConnection;
+import android.widget.EditText;
 
 public class MyEdit extends EditText{
     public static final String TAG="MyEdit";

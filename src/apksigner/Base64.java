@@ -32,7 +32,7 @@ public class Base64 {
 	}
     }
 
-    public static String encode(byte[] data, int offset, int length) {
+    private static String encode(byte[] data, int offset, int length) {
         int i;
         int encodedLen;
         char[] encoded;

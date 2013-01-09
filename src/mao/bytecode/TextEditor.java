@@ -17,7 +17,6 @@ import android.content.Intent;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.ScrollView;
-import android.widget.LinearLayout;
 import android.widget.CheckBox;
 import android.graphics.Typeface;
 
@@ -26,13 +25,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuInflater;
 import android.view.KeyEvent;
-import android.util.Log;
-import android.util.DisplayMetrics;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 
 import android.preference.PreferenceManager;
 import mao.layoutviewer.LayoutViewer;
@@ -42,25 +38,23 @@ import mao.util.StringUtils;
 
 public class TextEditor extends Activity {
 
-    public static final int SETTEXT=1;
-    public static final int TOAST=2;
+    private static final int SETTEXT=1;
+    private static final int TOAST=2;
     public static final String PLUGIN="plugin";
-    public static final String DATA="data";
     
     private static final int LAYOUT_VIEWER = 119;
 
-    Edit edit;
-    EditText text;
+    private Edit edit;
+    private EditText text;
     private SharedPreferences mPreferences;
     private TextSettings mSettings;
     private boolean isViewText=true;
-    private String content;
     private boolean isChanged=false;
     private boolean noText=false;
     private boolean isXml = false;
 
-    public static  String searchString="";
-    public static  String replaceString="";
+    private static String searchString="";
+    private static String replaceString="";
     public static byte[] data;//single
     private ScrollView scroll;
     
@@ -130,7 +124,7 @@ public class TextEditor extends Activity {
 
 
 
-    public void open(){
+    private void open(){
         new Thread(new Runnable(){
             public void run(){
                 try{
@@ -279,7 +273,7 @@ public class TextEditor extends Activity {
         }
     }
 
-    public void toast(String message) {
+    private void toast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
@@ -375,7 +369,7 @@ public class TextEditor extends Activity {
     }
 
 
-    class Text implements Edit{
+    private class Text implements Edit{
 
         public void read(List<String> data,byte[] input)throws IOException{
             String s=new String(input,"UTF-8");

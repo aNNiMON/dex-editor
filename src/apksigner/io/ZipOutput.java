@@ -30,35 +30,12 @@ import java.util.Set;
 public class ZipOutput 
 {
 
+    private OutputStream out = null;
+    private int filePointer = 0;
 
-    String outputFilename;
-    OutputStream out = null;
-    int filePointer = 0;
-
-    List<ZioEntry> entriesWritten = new LinkedList<ZioEntry>();
-    Set<String> namesWritten = new HashSet<String>();
-    
-    public ZipOutput( String filename) throws IOException
-    {
-        this.outputFilename = filename;
-        File ofile = new File( outputFilename);
-        init(ofile);
-    }
-    
-    public ZipOutput( File outputFile) throws IOException
-    {
-        this.outputFilename = outputFile.getAbsolutePath();
-        File ofile = outputFile;
-        init(ofile);
-    }
+    private List<ZioEntry> entriesWritten = new LinkedList<ZioEntry>();
+    private Set<String> namesWritten = new HashSet<String>();
         
-    private void init( File ofile) throws IOException
-    {
-        if (ofile.exists()) ofile.delete();
-        out = new FileOutputStream( ofile);
-        
-    }
-
     public ZipOutput( OutputStream os) throws IOException
     {
         out = os;

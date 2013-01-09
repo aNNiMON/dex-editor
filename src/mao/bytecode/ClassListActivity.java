@@ -1,67 +1,52 @@
 package mao.bytecode;
 
-import android.app.ListActivity;
-import android.app.Dialog;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.Stack;
+import mao.dalvik.Parser;
+import org.jf.dexlib.ClassDataItem;
+import org.jf.dexlib.ClassDefItem;
+import org.jf.dexlib.DexFile;
+import org.jf.dexlib.IndexedSection;
+import org.jf.dexlib.TypeIdItem;
+import org.jf.dexlib.Util.ByteArrayAnnotatedOutput;
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MenuInflater;
-import android.view.LayoutInflater;
-import android.view.KeyEvent;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.content.Intent;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.ImageView;
-import android.widget.Toast;
-import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ScrollView;
-import android.widget.RadioGroup;
-import android.widget.RadioButton;
+import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
-import android.util.Log;
-import android.database.DataSetObserver;
-
-import java.text.SimpleDateFormat;
-
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.Stack;
-import java.util.Enumeration;
-import java.util.Date;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.zip.*;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ByteArrayOutputStream;
-
-import org.jf.dexlib.*;
-import org.jf.dexlib.Code.*;
-import org.jf.dexlib.Util.*;
-
-import mao.dalvik.Parser;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class ClassListActivity extends ListActivity {
 
@@ -72,14 +57,13 @@ public class ClassListActivity extends ListActivity {
     public static String searchMethodClass="";
     public static String searchMethodName="";
     public static String searchMethodDescriptor="";
-    public static final int SAVEFILE=1;
-    public static final int SAVEDISMISS=2;
-    public static  final String MERGER="MergerDexFile";
+    private static final int SAVEFILE=1;
+    private static final int SAVEDISMISS=2;
     private static final String title="/";
-    public Tree tree;
+    private Tree tree;
 
-    public static HashMap<String,ClassDefItem> classMap;
-    public static HashMap<String,ClassDefItem> deleteclassMap;
+    private static HashMap<String,ClassDefItem> classMap;
+    private static HashMap<String,ClassDefItem> deleteclassMap;
     public static DexFile dexFile;
     public static boolean isChanged;
     public static ClassDefItem curClassDef;
@@ -88,7 +72,7 @@ public class ClassListActivity extends ListActivity {
     private static int dep;
     private static Stack<String> path;
 
-    public static String curFile;
+    private static String curFile;
     private ClassListAdapter mAdapter;
     private List<String> classList;
 
@@ -484,15 +468,6 @@ public class ClassListActivity extends ListActivity {
         startActivity(intent);
     }
 
-
-    private void openTypePool(){
-        Intent intent=new Intent(this,TextEditor.class);
-        intent.putExtra(TextEditor.PLUGIN,"TypeIdsEditor");
-        startActivity(intent);
-    }
-
-
-
     private void replaceClassType(String src,String dst){
         for(TypeIdItem type: dexFile.TypeIdsSection.getItems()){
             String s=type.getTypeDescriptor();
@@ -784,7 +759,7 @@ public class ClassListActivity extends ListActivity {
 
 
 
-    public void toast(String message) {
+    private void toast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
@@ -855,9 +830,9 @@ public class ClassListActivity extends ListActivity {
     }
     
 
-    static class Tree{
-        List<Map<String,String>> node;
-        Comparator<String> sortByType=new Comparator<String>(){
+    private static class Tree{
+        private List<Map<String,String>> node;
+        private Comparator<String> sortByType=new Comparator<String>(){
             public int compare(String a,String b){
                 if(isDirectory(a) && !isDirectory(b)){
                     return -1;
@@ -869,7 +844,7 @@ public class ClassListActivity extends ListActivity {
             }
         };
 
-        public Tree(Set<String> names){
+        private Tree(Set<String> names){
             if(path==null){
                 path=new Stack<String>();
                 dep=0;
@@ -937,24 +912,14 @@ public class ClassListActivity extends ListActivity {
             return str;
         }
 
-        public void addNode(String name){
-            Map<String,String> map=node.get(dep);
-            map.put(getCurPath()+name,getCurPath());
-        }
-
-        public void deleteNode(String name){
-            Map<String,String> map=node.get(dep);
-            map.remove(getCurPath()+name);
-        }
-
-        public List<String> list(){
+        private List<String> list(){
             return list(getCurPath());
         }
-        public void push(String name){
+        private void push(String name){
             dep++;
             path.push(name);
         }
-        public String pop(){
+        private String pop(){
             if(dep>0){
                 dep--;
                 return path.pop();
@@ -964,7 +929,7 @@ public class ClassListActivity extends ListActivity {
         public String getCurPath(){
             return join(path,"/");
         }
-        public boolean isDirectory(String name){
+        private boolean isDirectory(String name){
             return name.endsWith("/");
         }
         
@@ -978,8 +943,5 @@ public class ClassListActivity extends ListActivity {
 
 
     }
-
-    
-
 
 }

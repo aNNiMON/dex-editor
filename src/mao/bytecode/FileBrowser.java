@@ -16,24 +16,52 @@
 
 package mao.bytecode;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.lang.ref.SoftReference;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.net.URLConnection;
+import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Stack;
+import java.util.Vector;
+import java.util.zip.ZipFile;
+import mao.util.FileUtil;
+import mao.util.FileUtils;
+import mao.util.ZipExtract;
+import org.jf.dexlib.DexFile;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.content.pm.PackageInfo;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.content.res.Configuration;
 import android.database.DataSetObserver;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
@@ -47,76 +75,29 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import android.util.*;
-
-import dalvik.system.VMRuntime;
-
-import android.graphics.drawable.Drawable;
-
-import java.lang.reflect.*;
-import java.lang.ref.*;
-
-
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.IOException;
-import java.net.URLConnection;
-import java.text.SimpleDateFormat;
-
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Vector;
-import java.util.Stack;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.zip.*;
-
-
-import mao.util.*;
-import org.jf.dexlib.*;
 
 
 public class FileBrowser extends ListActivity {
 
     private final static String EMPTY = "";
-    public final static String SELECTED = "FileBrowser";
     public final static String ENTRYPATH = "ZipEntry";
-    public final static String POS = "file_position";
     public final static String SELECTEDMOD = "selected_mod";
-    public final static String CURRENTFILE = "current_file";
-    public final static String CURRENTDIR = "current_dir";
-    public final static String CLIPBOARD = "file_clipboard";
-    public final static String TAG = "FileBrowser";
+    private final static String TAG = "FileBrowser";
 
     private Stack<Integer> pos=new Stack<Integer>();
 
     private List<File> mFileList;
     private FileListAdapter mAdapter;
     private boolean mSelectMod = false;
-    private boolean isApk = false;
     private String mQuery = EMPTY;
     private File mCurrentDir;
     private File mCurrent;
 
-    //
-    private boolean mShowPermissions;
-    private boolean mShowSize;
-    public int position ; 
+    private int position; 
 
     private static boolean mCut;
     private static File mClipboard;
@@ -142,7 +123,7 @@ public class FileBrowser extends ListActivity {
             }
     };
 
-    Comparator<File> sortByType=new Comparator<File>(){
+    private Comparator<File> sortByType=new Comparator<File>(){
         public int compare(File file1,File file2){
             boolean a=file1.isDirectory();
             boolean b=file2.isDirectory();
@@ -160,22 +141,21 @@ public class FileBrowser extends ListActivity {
     };
 
 
-    private final static float TARGET_HEAP_UTILIZATION = 0.75f;
-    public static final int SHOWPROGRESS = 1; 
-    public static final int DISMISSPROGRESS = 2; 
-    public static final int TOAST = 3; 
-    public static final int ERROR = 4; 
-    public static final int SHOWMESSAGE = 5; 
+    private static final int SHOWPROGRESS = 1; 
+    private static final int DISMISSPROGRESS = 2; 
+    private static final int TOAST = 3; 
+    private static final int ERROR = 4; 
+    private static final int SHOWMESSAGE = 5; 
     // Linux stat constants
-    public static final int S_IFMT = 0170000; /* type of file */
-    public static final int S_IFLNK = 0120000; /* symbolic link */
-    public static final int S_IFREG = 0100000; /* regular */
-    public static final int S_IFBLK = 0060000; /* block special */
-    public static final int S_IFDIR = 0040000; /* directory */
-    public static final int S_IFCHR = 0020000; /* character special */
-    public static final int S_IFIFO = 0010000; /* this is a FIFO */
-    public static final int S_ISUID = 0004000; /* set user id on execution */
-    public static final int S_ISGID = 0002000; /* set group id on execution */
+    private static final int S_IFMT = 0170000; /* type of file */
+    private static final int S_IFLNK = 0120000; /* symbolic link */
+    private static final int S_IFREG = 0100000; /* regular */
+    private static final int S_IFBLK = 0060000; /* block special */
+    private static final int S_IFDIR = 0040000; /* directory */
+    private static final int S_IFCHR = 0020000; /* character special */
+    private static final int S_IFIFO = 0010000; /* this is a FIFO */
+    private static final int S_ISUID = 0004000; /* set user id on execution */
+    private static final int S_ISGID = 0002000; /* set group id on execution */
 
 /*
     static{
@@ -456,7 +436,6 @@ public class FileBrowser extends ListActivity {
     private  boolean isZip(File file){
         String name=file.getName().toLowerCase();
         if(name.endsWith(".apk")){
-            isApk=true;
             return true;
         }
         if(name.endsWith(".zip")
@@ -613,7 +592,7 @@ public class FileBrowser extends ListActivity {
     }
 
 
-    public void clearAll(){
+    private void clearAll(){
         mCurrent=null;
         mClipboard=null;
         mCurrentDir=null;
@@ -756,7 +735,7 @@ public class FileBrowser extends ListActivity {
     /**
      * Show and edit file permissions
      */
-    public void showPermissions() {
+    private void showPermissions() {
         mPermissionDialog.setTitle(mCurrent.getName());
         try {
             int perms = FileUtils.getPermissions(mCurrent);
@@ -783,7 +762,7 @@ public class FileBrowser extends ListActivity {
     /**
      * Perform permission setting
      */
-    public void setPermissions() {
+    private void setPermissions() {
         mPermissionDialog.hide();
         int perms =
             getPermBit(8, R.id.ckOwnRead) | getPermBit(7, R.id.ckOwnWrite)
@@ -822,7 +801,7 @@ public class FileBrowser extends ListActivity {
         }
     }
 
-    public void toast(String message) {
+    private void toast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
@@ -863,7 +842,7 @@ public class FileBrowser extends ListActivity {
 
     }
 
-    protected void performPasteFile(final File source, final File destination) {
+    private void performPasteFile(final File source, final File destination) {
         if (source.isDirectory()) {
             showMessage(this,getString(R.string.copy_exception),getString(R.string.copy_exist));
         } else {
@@ -972,7 +951,7 @@ public class FileBrowser extends ListActivity {
     }
 
     
-    public void showAbout() {
+    private void showAbout() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setIcon(R.drawable.android);
         String title=getString(R.string.app_name);
@@ -1272,7 +1251,6 @@ public class FileBrowser extends ListActivity {
             }
 
             final ImageView icon = (ImageView) container.findViewById(R.id.icon);
-            int resourceId;
             if (file.isDirectory()) {
                 icon.setImageResource(R.drawable.folder);
             }else if(name.endsWith(".apk")){
@@ -1361,13 +1339,13 @@ public class FileBrowser extends ListActivity {
         }
     }
 
-    public class AsyncImageLoader {
+    private class AsyncImageLoader {
         private HashMap<String, SoftReference<Drawable>> imageCache;
 
         public AsyncImageLoader() {
             imageCache=new HashMap<String, SoftReference<Drawable>>();
         }
-        public Drawable loadDrawable(final String imageUrl,final ImageView imageView,final ImageCallback imageCallback){
+        private Drawable loadDrawable(final String imageUrl,final ImageView imageView,final ImageCallback imageCallback){
             if(imageCache.containsKey(imageUrl)) {
                 SoftReference<Drawable> softReference=imageCache.get(imageUrl);
                 Drawable drawable=softReference.get();
@@ -1395,7 +1373,7 @@ public class FileBrowser extends ListActivity {
         }
     }
 
-    public static interface ImageCallback {
+    private static interface ImageCallback {
         public void imageLoaded(Drawable imageDrawable,ImageView imageView);
     }
 

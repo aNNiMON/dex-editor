@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import android.app.AlertDialog;
 import android.widget.EditText;
-import android.widget.Toast;
 import android.view.KeyEvent;
 import android.content.DialogInterface;
 import android.text.TextWatcher;
@@ -23,15 +22,14 @@ import org.jf.dexlib.Code.Format.*;
 import mao.dalvik.Parser;
 
 public class MethodItemNewActivity extends Activity {
-    public static final Pattern pattern=Pattern.compile("\\s");
-    public static final Pattern pParams=Pattern.compile("\\s|\\(|\\)");
+    private static final Pattern pattern=Pattern.compile("\\s");
+    private static final Pattern pParams=Pattern.compile("\\s|\\(|\\)");
     private boolean isChanged;
     private EditText accessFlagsEdit;
     private EditText methodNameEdit;
     private EditText descriptorEdit;
     private EditText registerCountEdit;
     private ClassDefItem classDef;
-    private EncodedMethod method;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +63,7 @@ public class MethodItemNewActivity extends Activity {
 
     }
 
-    public void init(){
+    private void init(){
         classDef=ClassListActivity.curClassDef;
         
         accessFlagsEdit.setText("");
@@ -186,7 +184,6 @@ public class MethodItemNewActivity extends Activity {
         descriptorEdit=null;
         registerCountEdit=null;
         classDef=null;
-        method=null;
         System.gc();
     }
  

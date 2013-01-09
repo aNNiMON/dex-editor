@@ -9,7 +9,6 @@ import java.io.OutputStream;
 
 import org.jf.dexlib.*;
 import org.jf.dexlib.Code.*;
-import org.jf.dexlib.Code.Format.*;
 import org.jf.dexlib.Util.*;
 
 

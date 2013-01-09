@@ -3,9 +3,6 @@ package mao.res;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.OutputStream;
 import java.io.IOException;
@@ -13,10 +10,10 @@ import java.io.IOException;
 import mao.bytecode.Edit;
 
 
-public class AXmlEditor implements Edit{
+public class AXmlEditor implements Edit {
     private AXmlDecoder axml;
 
-    public void read(final List<String> data,byte[] input)throws IOException{
+    public void read(final List<String> data, byte[] input)throws IOException{
         axml=AXmlDecoder.read(new ByteArrayInputStream(input));
         axml.mTableStrings.getStrings(data);
     }

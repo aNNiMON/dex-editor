@@ -1,6 +1,4 @@
-
 package mao.res;
-
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,7 +8,6 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 import mao.util.LEDataInputStream;
@@ -19,22 +16,13 @@ import mao.util.LEDataOutputStream;
 public class ARSCDecoder
 {
     private final LEDataInputStream mIn;
-    public StringBlock mTableStrings;
-    private StringBlock mTypeNames;
-    private StringBlock mSpecNames;
-    private int mResId;
-    int packageCount;
+    StringBlock mTableStrings;
+    private int packageCount;
 
 
-    byte[] buf;
-    String name;
-    int id;
-
-
-
-    public static final int ARSC_CHUNK_TYPE=0x000c0002;
-    public static final int CHECK_PACKAGE=512;
-    ByteArrayOutputStream byteOut=new ByteArrayOutputStream();
+    private static final int ARSC_CHUNK_TYPE=0x000c0002;
+    
+    private ByteArrayOutputStream byteOut=new ByteArrayOutputStream();
 
 
     private ARSCDecoder(InputStream arscStream)
@@ -102,7 +90,7 @@ public class ARSCDecoder
 
 
     
-    public void writePackage( LEDataOutputStream out)throws IOException{
+    private void writePackage( LEDataOutputStream out)throws IOException{
         /*
         out.writeShort((short)CHECK_PACKAGE);
         out.writeShort((short)package_unknow1);

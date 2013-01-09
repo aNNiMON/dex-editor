@@ -28,17 +28,17 @@ import javax.crypto.IllegalBlockSizeException;
 
 public class Signature {
 
-    byte[] beforeAlgorithmIdBytes =  { 0x30, 0x21 };
+    private byte[] beforeAlgorithmIdBytes =  { 0x30, 0x21 };
 
     //      byte[] algorithmIdBytes;    
     //		algorithmIdBytes =  sun.security.x509.AlgorithmId.get("SHA1").encode();    
-    byte[] algorithmIdBytes = {0x30, 0x09, 0x06, 0x05, 0x2B, 0x0E, 0x03, 0x02, 0x1A, 0x05, 0x00 }; 
+    private byte[] algorithmIdBytes = {0x30, 0x09, 0x06, 0x05, 0x2B, 0x0E, 0x03, 0x02, 0x1A, 0x05, 0x00 }; 
 
-    byte[] afterAlgorithmIdBytes = { 0x04, 0x14 };
+    private byte[] afterAlgorithmIdBytes = { 0x04, 0x14 };
 
-    Cipher cipher;
+    private Cipher cipher;
 
-    MessageDigest md;
+    private MessageDigest md;
     private static Signature signature=new Signature();
 
     public static Signature getInstance(){
@@ -58,10 +58,6 @@ public class Signature {
 
     public void update( byte[] data) {
         md.update( data);
-    }
-
-    public void update( byte[] data, int offset, int count) {
-        md.update( data, offset, count);
     }
 
     public byte[] sign() throws BadPaddingException, IllegalBlockSizeException 

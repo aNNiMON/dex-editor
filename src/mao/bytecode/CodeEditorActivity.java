@@ -1,12 +1,5 @@
 package mao.bytecode;
 
-import java.io.File;
-import java.io.ByteArrayOutputStream;
-import java.io.OutputStream;
-import java.util.List;
-import java.util.ArrayList;
-import java.io.IOException;
-
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -22,13 +15,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.util.Log;
 import android.text.TextWatcher;
 import android.text.Editable;
 import android.graphics.Typeface;
 
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.preference.PreferenceManager;
 
 import org.jf.dexlib.*;
@@ -50,8 +41,8 @@ public class CodeEditorActivity extends Activity {
     private SharedPreferences mPreferences;
     private TextSettings mSettings;
 
-    public static  String searchString="";
-    public static  String replaceString="";
+    private static String searchString="";
+    private static String replaceString="";
 
     @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -80,7 +71,7 @@ public class CodeEditorActivity extends Activity {
 
         }
 
-    public void init(){
+    private void init(){
         classDef=ClassListActivity.curClassDef;
         if(MethodListActivity.isDirectMethod){
             method=classDef.getClassData().getDirectMethods()[MethodListActivity.methodIndex];
@@ -157,7 +148,7 @@ public class CodeEditorActivity extends Activity {
     }
 
 
-    public void toast(String message) {
+    private void toast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 

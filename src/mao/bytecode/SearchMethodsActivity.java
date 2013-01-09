@@ -1,67 +1,26 @@
 package mao.bytecode;
 
+import java.util.ArrayList;
+import java.util.List;
 import android.app.ListActivity;
-import android.app.Dialog;
-import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MenuInflater;
-import android.view.LayoutInflater;
-import android.view.KeyEvent;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
-import android.content.Intent;
-import android.content.Context;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.ImageView;
-import android.widget.Toast;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView;
-import android.util.Log;
-import android.database.DataSetObserver;
-
-import java.text.SimpleDateFormat;
-
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.Stack;
-import java.util.Enumeration;
-import java.util.Date;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.zip.*;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ByteArrayOutputStream;
-
-import org.jf.dexlib.*;
-import org.jf.dexlib.ClassDataItem.*;
 public class SearchMethodsActivity extends ListActivity {
 
     private MethodItemAdapter mAdapter;
     private static List<String> methodList;
     private static List<Boolean> isDirectes;
     private static List<Integer> methodIndexes;
-
-
-
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

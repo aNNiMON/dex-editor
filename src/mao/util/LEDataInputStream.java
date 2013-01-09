@@ -8,21 +8,16 @@ import java.io.InputStream;
 public final class LEDataInputStream
   implements DataInput
 {
-  protected final DataInputStream dis;
-  protected final InputStream is;
-  protected final byte[] work;
-  int s,end;
+    private final DataInputStream dis;
+    private final InputStream is;
+    private final byte[] work;
+    private int s,end;
 
   public LEDataInputStream(InputStream in)
   {
     is = in;
     dis = new DataInputStream(in);
     work = new byte[8];
-  }
-
-
-  public int size(){
-      return end;
   }
 
   public final boolean readBoolean()
@@ -57,54 +52,12 @@ public final class LEDataInputStream
     }
     return array;
   }
-  public void skipInt() throws IOException {
-    skipBytes(4);
-  }
 
   public void skipCheckInt(int expected) throws IOException {
     int got = readInt();
     if (got != expected)
       throw new IOException(String.format("Expected: 0x%08x, got: 0x%08x", new Object[] { Integer.valueOf(expected), Integer.valueOf(got) }));
   }
-
-  public void skipCheckShort(short expected)
-    throws IOException
-  {
-    short got = readShort();
-    if (got != expected)
-      throw new IOException(String.format("Expected: 0x%08x, got: 0x%08x", new Object[] { Short.valueOf(expected), Short.valueOf(got) }));
-  }
-
-  public void skipCheckByte(byte expected)
-    throws IOException
-  {
-    byte got = readByte();
-    if (got != expected)
-      throw new IOException(String.format("Expected: 0x%08x, got: 0x%08x", new Object[] { Byte.valueOf(expected), Byte.valueOf(got) }));
-  }
-
-  public String readNulEndedString(int length, boolean fixed)
-    throws IOException
-  {
-    StringBuilder string = new StringBuilder(16);
-    while (length-- != 0) {
-      short ch = readShort();
-      end+=2;
-      if (ch == 0) {
-        break;
-      }
-      string.append((char)ch);
-    }
-    if (fixed) {
-      skipBytes(length * 2);
-      end+=length*2;
-    }
-
-
-
-    return string.toString();
-  }
-
 
   public int read(byte[] b,int a,int len)throws IOException{
       return dis.read(b,a,len);

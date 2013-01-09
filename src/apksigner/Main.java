@@ -1,47 +1,39 @@
 package apksigner;
 
-
-
-import apksigner.io.ZioEntry;
-import apksigner.io.ZipInput;
-import apksigner.io.ZipOutput;
-
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.io.File;
-
 import java.security.DigestOutputStream;
 import java.security.GeneralSecurityException;
+import java.security.Key;
 import java.security.KeyFactory;
 import java.security.MessageDigest;
 import java.security.PrivateKey;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
-import java.security.Key;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.jar.Attributes;
-import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-import java.util.jar.JarOutputStream;
 import java.util.jar.Manifest;
 import java.util.regex.Pattern;
-
 import javax.crypto.Cipher;
 import javax.crypto.EncryptedPrivateKeyInfo;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
+import apksigner.io.ZioEntry;
+import apksigner.io.ZipInput;
+import apksigner.io.ZipOutput;
 
 
 
@@ -57,12 +49,12 @@ public class Main{
 
 
 
-    public static final String[] DEFAULT_KEYS={
+    private static final String[] DEFAULT_KEYS={
         "media","platform","shared","testkey"};
-    static PrivateKey privateKey;
+    private static PrivateKey privateKey;
     
-    static X509Certificate publicKey;
-    static byte[] sigBlockTemp;
+    private static X509Certificate publicKey;
+    private static byte[] sigBlockTemp;
     private static Main res=new Main();
     
     private static X509Certificate readPublicKey(InputStream input)throws IOException, GeneralSecurityException{
@@ -300,7 +292,7 @@ public class Main{
     }
     
     */
-    public   void loadKeys( String name)
+    private void loadKeys( String name)
         throws IOException, GeneralSecurityException
     {
         
@@ -370,14 +362,8 @@ public class Main{
     */
 
 
- 
 
-
-
-
-
-
-    public static void sign(String in,String ou){
+    private static void sign(String in,String ou){
 
         ZipInput input=null;
         ZipOutput zipOut=null;

@@ -6,21 +6,19 @@ import android.os.Bundle;
 
 import android.app.AlertDialog;
 import android.widget.EditText;
-import android.widget.Toast;
 import android.view.KeyEvent;
 import android.content.DialogInterface;
 import android.text.TextWatcher;
 import android.text.Editable;
 
 import java.util.regex.*;
-import java.util.*;
 
 import org.jf.dexlib.*;
 import org.jf.dexlib.Util.*;
 import org.jf.dexlib.ClassDataItem.*;
 
 public class FieldItemEditorActivity extends Activity {
-    public static final Pattern pattern=Pattern.compile("\\s");
+    private static final Pattern pattern=Pattern.compile("\\s");
     private boolean isChanged;
     private EditText accessFlagsEdit;
     private EditText fieldNameEdit;

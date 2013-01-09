@@ -1,80 +1,73 @@
 package mao.bytecode;
 
-import android.app.ListActivity;
-import android.app.Dialog;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import java.util.Stack;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+import java.util.zip.ZipOutputStream;
+import mao.res.AXmlDecoder;
+import mao.util.FileUtil;
+import mao.util.ZipExtract;
+import org.jf.dexlib.DexFile;
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MenuInflater;
-import android.view.LayoutInflater;
-import android.view.KeyEvent;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.content.Intent;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.res.Configuration;
-import android.widget.LinearLayout;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.ImageView;
-import android.widget.Toast;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.AdapterView;
-import android.util.Log;
-import android.database.DataSetObserver;
-
-import java.text.SimpleDateFormat;
-
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Locale;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.Stack;
-import java.util.Enumeration;
-import java.util.Date;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.zip.*;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ByteArrayInputStream;
-
-
-import mao.util.*;
-import mao.res.*;
-
-import org.jf.dexlib.*;
+import android.widget.Toast;
 
 
 
 public class ZipEditor extends ListActivity {
 
-    public static final String EXTRACTPATH="/sdcard/DBEditor";
-    public static HashMap<String,byte[]> zipEnties;
-    public Tree tree;
+    private static final String EXTRACTPATH="/sdcard/DBEditor";
+    private static HashMap<String,byte[]> zipEnties;
+    private Tree tree;
     private static ZipFile zipFile;
-    public static String file;
+    private static String file;
     public static String zipFileName;
     private String title="";
-    private String progress="";
     private boolean isSigne=false;
     private boolean isChanged=false;
     private FileListAdapter mAdapter;
@@ -401,7 +394,7 @@ public class ZipEditor extends ListActivity {
             clearAll();
         }
 
-    public void clearAll(){
+    private void clearAll(){
         zipEnties=null;
         zipFile=null;
         path=null;
@@ -637,7 +630,7 @@ public class ZipEditor extends ListActivity {
             return true;
         }
 
-    public void toast(String message) {
+    private void toast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
@@ -867,9 +860,9 @@ public class ZipEditor extends ListActivity {
 
 
     }
-    static class Tree{
-        List<Map<String,String>> node;
-        Comparator<String> sortByType=new Comparator<String>(){
+    private static class Tree{
+        private List<Map<String,String>> node;
+        private Comparator<String> sortByType=new Comparator<String>(){
             public int compare(String a,String b){
                 if(isDirectory(a) && !isDirectory(b)){
                     return -1;
@@ -952,24 +945,19 @@ public class ZipEditor extends ListActivity {
             return str;
         }
 
-        public void addNode(String name){
+        private void addNode(String name){
             Map<String,String> map=node.get(dep);
             map.put(getCurPath()+name,getCurPath());
         }
 
-        public void deleteNode(String name){
-            Map<String,String> map=node.get(dep);
-            map.remove(getCurPath()+name);
-        }
-
-        public List<String> list(){
+        private List<String> list(){
             return list(getCurPath());
         }
-        public void push(String name){
+        private void push(String name){
             dep++;
             path.push(name);
         }
-        public String pop(){
+        private String pop(){
             if(dep>0){
                 dep--;
                 return path.pop();
@@ -981,7 +969,7 @@ public class ZipEditor extends ListActivity {
         //    Log.e("tree Curpath",join(path,"/"));
             return join(path,"/");
         }
-        public boolean isDirectory(String name){
+        private boolean isDirectory(String name){
             return name.endsWith("/");
         }
 
@@ -1009,23 +997,7 @@ public class ZipEditor extends ListActivity {
     }
 
 
-    private static byte[] readEntry(ZipFile zipFile,String name)throws IOException{
-        ZipEntry zipEntry=zipFile.getEntry(name);
-        if(zipEntry != null){
-            ByteArrayOutputStream baos = new ByteArrayOutputStream(8*1024);
-            InputStream in=zipFile.getInputStream(zipEntry);
-            byte[] buf=new byte[4*1024];
-            int count;
-            while((count=in.read(buf, 0, buf.length)) !=-1){
-                baos.write(buf,0,count);
-            }
-            return baos.toByteArray();
-        }
-        return null;
-    }
-
-
-    public static void zip(ZipFile zipFile,Map<String,byte[]> map,File file)throws IOException {
+    private static void zip(ZipFile zipFile,Map<String,byte[]> map,File file)throws IOException {
         FileOutputStream out = new FileOutputStream(file);
         ZipOutputStream zos =new ZipOutputStream(out);
         byte[] buf=new byte[10*1024];

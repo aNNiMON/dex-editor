@@ -1,7 +1,6 @@
 package mao.bytecode;
 
 import android.content.SharedPreferences;
-import android.view.KeyEvent;
 
 /**
  * Terminal emulator settings

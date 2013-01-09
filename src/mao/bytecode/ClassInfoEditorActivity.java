@@ -6,7 +6,6 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 import android.content.DialogInterface;
 import android.widget.EditText;
-import android.widget.Toast;
 import android.view.KeyEvent;
 import android.text.TextWatcher;
 import android.text.Editable;
@@ -18,7 +17,7 @@ import org.jf.dexlib.*;
 import org.jf.dexlib.Util.*;
 
 public class ClassInfoEditorActivity extends Activity {
-    public static final Pattern pattern=Pattern.compile("\\s");
+    private static final Pattern pattern=Pattern.compile("\\s");
     private EditText accessFlagsEdit;
     private EditText superclassEdit;
     private EditText interfacesEdit;
@@ -157,10 +156,6 @@ public class ClassInfoEditorActivity extends Activity {
         ClassListActivity.isChanged=true;
         isChanged=false;
 
-    }
-
-    public void toast(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     private void clearAll(){
