@@ -459,11 +459,14 @@ public class FileBrowser extends ListActivity {
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-        if(mSelectMod)
+        if(mSelectMod) {
             return;
-        super.onCreateContextMenu(menu,v,menuInfo);
+        }
+        
+        super.onCreateContextMenu(menu, v, menuInfo);
         menu.setHeaderTitle(R.string.options);
-        File file=null;
+        
+        File file = null;
         AdapterView.AdapterContextMenuInfo info;
         try {
             info = (AdapterView.AdapterContextMenuInfo) menuInfo;
@@ -473,13 +476,15 @@ public class FileBrowser extends ListActivity {
         } catch (ClassCastException e) {
             Log.e(TAG,"Bad menuInfo"+ e);
         }
+        
+        if (file.getName().equals("..")) return;
+        
         menu.add(Menu.NONE, R.string.delete, Menu.NONE, R.string.delete);
         menu.add(Menu.NONE, R.string.rename, Menu.NONE, R.string.rename);
-        if(isZip(file)){
-            menu.add(Menu.NONE,R.string.signed, Menu.NONE, R.string.signed);
+        if (isZip(file)) {
+            menu.add(Menu.NONE, R.string.signed, Menu.NONE, R.string.signed);
             menu.add(Menu.NONE, R.string.extract_all, Menu.NONE, R.string.extract_all);
         }
-
         menu.add(Menu.NONE, R.string.copy, Menu.NONE, R.string.copy);
         menu.add(Menu.NONE, R.string.cut, Menu.NONE, R.string.cut);
         menu.add(Menu.NONE, R.string.paste, Menu.NONE, R.string.paste);
@@ -561,6 +566,20 @@ public class FileBrowser extends ListActivity {
             }
             return super.onKeyDown(keyCode, event);
         }
+    
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putString("dir_path", mCurrentDir.getAbsolutePath());
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        String dir = savedInstanceState.getString("dir_path");
+        mCurrentDir = new File(dir);
+        mAdapter.notifyDataSetInvalidated();
+        super.onRestoreInstanceState(savedInstanceState);
+    }
 
     @Override
         protected void onResume() {

@@ -357,16 +357,21 @@ public class ZipEditor extends ListActivity {
         }
     }
 */
-    private void init(){
-        title=zipFileName.substring(zipFileName.lastIndexOf("/")+1)+"/";
-        if(zipFileName.endsWith(".apk")){
-            isSigne=true;
+    private void init() {
+        try {
+            title = zipFileName.substring(zipFileName.lastIndexOf("/")+1) + "/";
+            if (zipFileName.endsWith(".apk")) {
+                isSigne = true;
+            }
+            unZip(zipFileName);
+            tree = new Tree(zipEnties.keySet());
+            setTitle(title + tree.getCurPath());
+            fileList = tree.list();
+        } catch (Exception ex) {
+            Log.e("ZIPEDITOR", "init()", ex);
         }
-        unZip(zipFileName);
-        tree=new Tree(zipEnties.keySet());
-        setTitle(title+tree.getCurPath());
-        fileList=tree.list();
     }
+    
     private void unZip(String name) {
         if(zipEnties !=null)
             return;
