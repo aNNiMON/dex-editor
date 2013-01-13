@@ -128,4 +128,5 @@
     <string name="choose_color">Выберите цвет</string>
     <string name="ignore_name_descriptor">Игнорировать имя и дескриптор</string>
     <string name="ignore_descriptor">Игнорировать дескриптор</string>
+    <string name="opcode_info">Dalvik коды</string>
 </resources>

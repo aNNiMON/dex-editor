@@ -13,7 +13,7 @@
     <string name="view">从系统打开</string>
     <string name="signed">签名</string>
     <string name="extract">解压</string>
-    <string name="extracting">解压中...</string>
+    <string name="extracting">解压中…</string>
     <string name="extracted">已解压</string>
     <string name="extract_all">解压</string>
     <string name="extract_zip">解压zip</string>
@@ -45,7 +45,7 @@
     <string name="directory_cannot_create">无法创建文件夹 \"%s\".</string>
     <string name="directory_empty">文件夹名字为空</string>
     <string name="exit">退出</string>
-    <string name="wait">请稍等...</string>
+    <string name="wait">请稍等…</string>
 
     <string name="add_method">添加方法</string>
     <string name="add_field">添加域</string>
@@ -59,13 +59,13 @@
     <string name="remove_field">删除域</string>
     <string name="rename_class">重命名类</string>
     <string name="zip_editor_remove">删除</string>
-    <string name="zip_remove_progress">删除中...</string>
+    <string name="zip_remove_progress">删除中…</string>
     <string name="is_remove">是否删除 ?</string>
     <string name="merger_dexfile">合并Dex</string>
     <string name="remove_class">删除类</string>
-    <string name="write_zip">写入中...</string>
-    <string name="load_data">正在加载...</string>
-    <string name="signed_zip">签名中...</string>
+    <string name="write_zip">写入中…</string>
+    <string name="load_data">正在加载…</string>
+    <string name="signed_zip">签名中…</string>
     <string name="string_pool">字符常量池</string>
     <string name="replace_axml">替换xml中字符</string>
     <string name="replace_src_view">搜索:</string>
@@ -88,7 +88,7 @@
     <string name="preferences">设置</string>
     <string name="prompt">提示</string>
     <string name="is_save">是否保存? </string>
-    <string name="saving">保存中...</string>
+    <string name="saving">保存中…</string>
     <string name="class_exists">类名 \"%s\" 已存在.</string>
 
 
@@ -123,12 +123,13 @@
 
     <string name="about">关于</string>
     <string name="about_content">作者:\n \n</string>
-    <string name="replacing">替换中...</string>
-    <string name="searching">搜索中...</string>
+    <string name="replacing">替换中…</string>
+    <string name="searching">搜索中…</string>
 
     <string name="from_start">从开始处</string>
     <string name="choose_color">选则颜色</string>
     <string name="ignore_name_descriptor">忽略名字与描述符</string>
     <string name="ignore_descriptor">忽略描述符</string>
+    <string name="opcode_info">Dalvik 代码</string>
 
 </resources>

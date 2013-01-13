@@ -13,7 +13,7 @@
     <string name="view">View</string>
     <string name="signed">Signed</string>
     <string name="extract">Extract</string>
-    <string name="extracting">Extract...</string>
+    <string name="extracting">Extract…</string>
     <string name="extracted">Extracted</string>
     <string name="extract_all">Extract All</string>
     <string name="extract_zip">Extract Zip</string>
@@ -32,7 +32,7 @@
     <string name="copy_message">File %s already exists. Overwrite?</string>
     <string name="copy_exception">File Copy Exception</string>
     <string name="copy_nothing">Nothing to copy</string>
-    <string name="copy_exist">Haven\'t worked out folder copy yet...</string>
+    <string name="copy_exist">Haven\'t worked out folder copy yet…</string>
     <string name="copied">Copied</string>
     <string name="over_write">Overwrite</string>
     <string name="cut">Cut</string>
@@ -45,7 +45,7 @@
     <string name="directory_cannot_create">Cannot create folder \"%s\".</string>
     <string name="directory_empty">Folder name is empty</string>
     <string name="exit">Exit</string>
-    <string name="wait">Please wait...</string>
+    <string name="wait">Please wait…</string>
 
     <string name="add_method">AddMethod</string>
     <string name="add_field">AddField</string>
@@ -59,13 +59,13 @@
     <string name="remove_field">RemoveField</string>
     <string name="rename_class">RenameClass</string>
     <string name="zip_editor_remove">Remove</string>
-    <string name="zip_remove_progress">Remove...</string>
+    <string name="zip_remove_progress">Remove…</string>
     <string name="is_remove">Is Remove ?</string>
     <string name="merger_dexfile">MergerDexFile</string>
     <string name="remove_class">RemoveClass</string>
-    <string name="write_zip">Writing...</string>
-    <string name="load_data">Loading...</string>
-    <string name="signed_zip">Signing...</string>
+    <string name="write_zip">Writing…</string>
+    <string name="load_data">Loading…</string>
+    <string name="signed_zip">Signing…</string>
     <string name="string_pool">StringPool</string>
     <string name="replace_axml">ReplaceAxml</string>
     <string name="replace_src_view">Search for:</string>
@@ -88,7 +88,7 @@
     <string name="preferences">Preferences</string>
     <string name="prompt">Prompt</string>
     <string name="is_save">Is Save? </string>
-    <string name="saving">Saving...</string>
+    <string name="saving">Saving…</string>
     <string name="class_exists">Class \"%s\" already exists.</string>
 
 
@@ -122,11 +122,12 @@
     <string name="text_preferences">TextPreferences</string>
     <string name="about">About</string>
     <string name="about_content">Author:\n\n</string>
-    <string name="replacing">Replacing...</string>
-    <string name="searching">Searching...</string>
-    <string name="from_start">FromStart</string>
+    <string name="replacing">Replacing…</string>
+    <string name="searching">Searching…</string>
+    <string name="from_start">From start</string>
     <string name="choose_color">Choose a color</string>
     <string name="ignore_name_descriptor">Ignore name and descriptor</string>
     <string name="ignore_descriptor">Ignore descriptor</string>
+    <string name="opcode_info">Opcode info</string>
 
 </resources>

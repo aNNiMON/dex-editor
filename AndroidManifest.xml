@@ -92,6 +92,11 @@
         <activity
             android:name=".ImageViewer"
             android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="mao.bytecode.opcodes.OpcodeInfoActivity"
+            android:theme="@android:style/Theme.Dialog"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/opcode_info" />
     </application>
 
 </manifest>

@@ -26,6 +26,7 @@ import org.jf.dexlib.*;
 import org.jf.dexlib.ClassDataItem.*;
 import org.jf.util.IndentingWriter;
 
+import mao.bytecode.opcodes.OpcodeInfoActivity;
 import mao.dalvik.Parser;
 
 public class CodeEditorActivity extends Activity {
@@ -122,15 +123,16 @@ public class CodeEditorActivity extends Activity {
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu m){
-        if(!noCode){
-            m.add(0,R.string.save_code,0,R.string.save_code);
+    public boolean onCreateOptionsMenu(Menu menu){
+        if (!noCode){
+            menu.add(0, R.string.save_code, 0, R.string.save_code);
         }
 
-        m.add(0,R.string.search,0,R.string.search);
-        m.add(0,R.string.method_editor,0,R.string.method_editor);
-        m.add(0,R.string.preferences,0,R.string.preferences);
-        m.add(0,R.string.exit,0,R.string.exit);
+        menu.add(0, R.string.search, 0, R.string.search);
+        menu.add(0, R.string.opcode_info, 0, R.string.opcode_info);
+        menu.add(0, R.string.method_editor, 0, R.string.method_editor);
+        menu.add(0, R.string.preferences, 0, R.string.preferences);
+        menu.add(0, R.string.exit, 0, R.string.exit);
         return true;
     }
 
@@ -176,11 +178,19 @@ public class CodeEditorActivity extends Activity {
         public boolean onOptionsItemSelected(MenuItem mi){
             switch(mi.getItemId()){
                 case R.string.method_editor:
-                    {
-                        Intent intent=new Intent(this,MethodItemEditorActivity.class);
-                        startActivity(intent);
-                        break;
-                    }
+                {
+                    Intent intent=new Intent(this,MethodItemEditorActivity.class);
+                    startActivity(intent);
+                    break;
+                }
+                
+                case R.string.opcode_info:
+                {
+                    Intent intent = new Intent(this, OpcodeInfoActivity.class);
+                    startActivity(intent);
+                    break;
+                }
+                
                 case R.string.save_code:
                     isChanged=!saveCode();
                     break;

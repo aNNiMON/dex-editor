@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<opcodes>
+<opcode hex="00" name="nop" desc="No operation" />
+<opcode hex="01" name="move vx,vy" desc="Moves the content of vy into vx. Both registers must be in the first 256 register range." />
+<opcode hex="02" name="move/from16 vx,vy" desc="Moves the content of vy into vx. vy may be in the 64k register range while vx is one of the first 256 registers." />
+<opcode hex="05" name="move-wide/from16 vx,vy" desc="Moves a long/double value from vy to vx. vy may be in the 64k register range while wx is one of the first 256 registers." />
+<opcode hex="07" name="move-object vx,vy" desc="Moves the object reference from vy to vx." />
+<opcode hex="08" name="move-object/from16 vx,vy" desc="Moves the object reference from vy to vx, vy can address 64k registers and vx can address 256 registers." />
+<opcode hex="0A" name="move-result vx" desc="Move the result value of the previous method invocation into vx." />
+<opcode hex="0B" name="move-result-wide vx" desc="Move the long/double result value of the previous method invocation into vx,vx+1." />
+<opcode hex="0C" name="move-result-object vx" desc="Move the result object reference of the previous method invocation into vx." />
+<opcode hex="0D" name="move-exception vx" desc="Move the exception object reference thrown during a method invocation into vx." />
+<opcode hex="0E" name="return-void" desc="Return without a return value" />
+<opcode hex="0F" name="return vx" desc="Return with vx return value" />
+<opcode hex="10" name="return-wide vx" desc="Return with double/long result in vx,vx+1." />
+<opcode hex="11" name="return-object vx" desc="Return with vx object reference value." />
+<opcode hex="12" name="const/4 vx,lit4" desc="Puts the 4 bit constant into vx" />
+<opcode hex="13" name="const/16 vx,lit16" desc="Puts the 16 bit constant into vx" />
+<opcode hex="14" name="const vx, lit32" desc="Puts the integer constant into vx" />
+<opcode hex="15" name="const/high16 v0, lit16" desc="Puts the 16 bit constant into the topmost bits of the register. Used to initialize float values." />
+<opcode hex="16" name="const-wide/16 vx, lit16" desc="Puts the integer constant into vx and vx+1 registers, expanding the integer constant into a long constant.." />
+<opcode hex="17" name="const-wide/32 vx, lit32" desc="Puts the 32 bit constant into vx and vx+1 registers, expanding the integer constant into a long constant." />
+<opcode hex="18" name="const-wide vx, lit64" desc="Puts the 64 bit constant into vx and vx+1 registers." />
+<opcode hex="19" name="const-wide/high16 vx,lit16" desc="Puts the 16 bit constant into the highest 16 bit of vx and vx+1 registers. Used to initialize double values." />
+<opcode hex="1A" name="const-string vx,string_id" desc="Puts reference to a string constant identified by string_id into vx." />
+<opcode hex="1C" name="const-class vx,type_id" desc="Moves the class object of a class identified by type_id (e.g. Object.class) into vx." />
+<opcode hex="1D" name="monitor-enter vx" desc="Obtains the monitor of the object referenced by vx." />
+<opcode hex="1E" name="monitor-exit" desc="Releases the monitor of the object referenced by vx." />
+<opcode hex="1F" name="check-cast vx, type_id" desc="Checks whether the object reference in vx can be cast to an instance of a class referenced by type_id. Throws ClassCastException if the cast is not possible, continues execution otherwise." />
+<opcode hex="20" name="instance-of vx,vy,type_id" desc="Checks whether vy is instance of a class identified by type_id. Sets vx non-zero if it is, 0 otherwise." />
+<opcode hex="21" name="array-length vx,vy" desc="Calculates the number of elements of the array referenced by vy and puts the length value into vx." />
+<opcode hex="22" name="new-instance vx,type" desc="Instantiates an object type and puts the reference of the newly created instance into vx." />
+<opcode hex="23" name="new-array vx,vy,type_id" desc="Generates a new array of type_id type and vy element size and puts the reference to the array into vx." />
+<opcode hex="24" name="filled-new-array {parameters},type_id" desc="Generates a new array of type_id and fills it with the parameters5. Reference to the newly generated array can be obtained by a move-result-object instruction, immediately following the filled-new-array instruction." />
+<opcode hex="25" name="filled-new-array-range {vx..vy},type_id" desc="Generates a new array of type_id and fills it with a range of parameters. Reference to the newly generated array can be obtained by a move-result-object instruction, immediately following the filled-new-array instruction." />
+<opcode hex="26" name="fill-array-data vx,array_data_offset" desc="Fills the array referenced by vx with the static data. The location of the static data is the sum of the position of the current instruction and the offset" />
+<opcode hex="27" name="throw vx" desc="Throws an exception object. The reference of the exception object is in vx." />
+<opcode hex="28" name="goto target" desc="Unconditional jump by short offset2." />
+<opcode hex="29" name="goto/16 target" desc="Unconditional jump by 16 bit offset2." />
+<opcode hex="2B" name="packed-switch vx,table" desc="Implements a switch statement where the case constants are close to each other. The instruction uses an index table. vx indexes into this table to find the offset of the instruction for a particular case. If vx falls out of the index table, the execution continues on the next instruction (default case)." />
+<opcode hex="2C" name="sparse-switch vx,table" desc="Implements a switch statement with sparse case table. The instruction uses a lookup table with case constants and offsets for each case constant. If there is no match in the table, execution continues on the next instruction (default case)." />
+<opcode hex="2D" name="cmpl-float" desc="Compares the float values in vy and vz and sets the integer value in vx accordingly3" />
+<opcode hex="2E" name="cmpg-float vx, vy, vz" desc="Compares the float values in vy and vz and sets the integer value in vx accordingly3." />
+<opcode hex="2F" name="cmpl-double vx,vy,vz" desc="Compares the double values in vy and vz2 and sets the integer value in vx accordingly3." />
+<opcode hex="30" name="cmpg-double vx, vy, vz" desc="Compares the double values in vy and vz2 and sets the integer value in vx accordingly3." />
+<opcode hex="31" name="cmp-long vx, vy, vz" desc="Compares the long values in vy and vz and sets the integer value in vx accordingly3." />
+<opcode hex="32" name="if-eq vx,vy,target" desc="Jumps to target if vx==vy2. vx and vy are integer values." />
+<opcode hex="33" name="if-ne vx,vy,target" desc="Jumps to target if vx!=vy2. vx and vy are integer values." />
+<opcode hex="34" name="if-lt vx,vy,target" desc="Jumps to target is vx&lt;vy2. vx and vy are integer values." />
+<opcode hex="35" name="if-ge vx, vy,target" desc="Jumps to target if vx&gt;=vy2. vx and vy are integer values." />
+<opcode hex="36" name="if-gt vx,vy,target" desc="Jumps to target if vx&gt;vy2. vx and vy are integer values." />
+<opcode hex="37" name="if-le vx,vy,target" desc="Jumps to target if vx&lt;=vy2. vx and vy are integer values." />
+<opcode hex="38" name="if-eqz vx,target" desc="Jumps to target if vx==02. vx is an integer value." />
+<opcode hex="39" name="if-nez vx,target" desc="Checks vx and jumps if vx is nonzero2." />
+<opcode hex="3A" name="if-ltz vx,target" desc="Checks vx and jumps if vx&lt;02." />
+<opcode hex="3B" name="if-gez vx,target" desc="Checks vx and jumps if vx&gt;=02." />
+<opcode hex="3C" name="if-gtz vx,target" desc="Checks vx and jumps if vx&gt;02." />
+<opcode hex="3D" name="if-lez vx,target" desc="Checks vx and jumps if vx&lt;=02." />
+<opcode hex="44" name="aget vx,vy,vz" desc="Gets an integer value of an object reference array into vx. The array is referenced by vy and is indexed by vz." />
+<opcode hex="45" name="aget-wide vx,vy,vz" desc="Gets a long/double value of long/double array into vx,vx+1. The array is referenced by vy and is indexed by vz." />
+<opcode hex="46" name="aget-object vx,vy,vz" desc="Gets an object reference value of an object reference array into vx. The array is referenced by vy and is indexed by vz." />
+<opcode hex="47" name="aget-boolean vx,vy,vz" desc="Gets a boolean value of a boolean array into vx. The array is referenced by vy and is indexed by vz." />
+<opcode hex="48" name="aget-byte vx,vy,vz" desc="Gets a byte value of a byte array into vx. The array is referenced by vy and is indexed by vz." />
+<opcode hex="49" name="aget-char vx, vy,vz" desc="Gets a char value of a character array into vx. The element is indexed by vz, the array object is referenced by vy" />
+<opcode hex="4A" name="aget-short vx,vy,vz" desc="Gets a short value of a short array into vx. The element is indexed by vz, the array object is referenced by vy." />
+<opcode hex="4B" name="aput vx,vy,vz" desc="Puts the integer value in vx into an element of an integer array. The element is indexed by vz, the array object is referenced by vy." />
+<opcode hex="4C" name="aput-wide vx,vy,vz" desc="Puts the double/long value in vx,vx+1 into a double/long array. The array is referenced by vy, the element is indexed by vz." />
+<opcode hex="4D" name="aput-object vx,vy,vz" desc="Puts the object reference value in vx into an element of an object reference array. The element is indexed by vz, the array object is referenced by vy." />
+<opcode hex="4E" name="aput-boolean vx,vy,vz" desc="Puts the boolean value in vx into an element of a boolean array. The element is indexed by vz, the array object is referenced by vy." />
+<opcode hex="4F" name="aput-byte vx,vy,vz" desc="Puts the byte value in vx into an element of a byte array. The element is indexed by vz, the array object is referenced by vy." />
+<opcode hex="50" name="aput-char vx,vy,vz" desc="Puts the char value in vx into an element of a character array. The element is indexed by vz, the array object is referenced by vy." />
+<opcode hex="51" name="aput-short vx,vy,vz" desc="Puts the short value in vx into an element of a short array. The element is indexed by vz, the array object is referenced by vy." />
+<opcode hex="52" name="iget vx, vy, field_id" desc="Reads an instance field into vx. The instance is referenced by vy." />
+<opcode hex="53" name="iget-wide vx,vy,field_id" desc="Reads an instance field into vx1. The instance is referenced by vy." />
+<opcode hex="54" name="iget-object vx,vy,field_id" desc="Reads an object reference instance field into vx. The instance is referenced by vy." />
+<opcode hex="55" name="iget-boolean vx,vy,field_id" desc="Reads a boolean instance field into vx. The instance is referenced by vy." />
+<opcode hex="56" name="iget-byte vx,vy,field_id" desc="Reads a byte instance field into vx. The instance is referenced by vy." />
+<opcode hex="57" name="iget-char vx,vy,field_id" desc="Reads a char instance field into vx. The instance is referenced by vy." />
+<opcode hex="58" name="iget-short vx,vy,field_id" desc="Reads a short instance field into vx. The instance is referenced by vy." />
+<opcode hex="59" name="iput vx,vy, field_id" desc="Puts vx into an instance field. The instance is referenced by vy." />
+<opcode hex="5A" name="iput-wide vx,vy, field_id" desc="Puts the wide value located in vx and vx+1 registers into an instance field. The instance is referenced by vy." />
+<opcode hex="5B" name="iput-object vx,vy,field_id" desc="Puts the object reference in vx into an instance field. The instance is referenced by vy." />
+<opcode hex="5C" name="iput-boolean vx,vy, field_id" desc="Puts the boolean value located in vx into an instance field. The instance is referenced by vy." />
+<opcode hex="5D" name="iput-byte vx,vy,field_id" desc="Puts the byte value located in vx into an instance field. The instance is referenced by vy." />
+<opcode hex="5E" name="iput-char vx,vy,field_id" desc="Puts the char value located in vx into an instance field. The instance is referenced by vy." />
+<opcode hex="5F" name="iput-short vx,vy,field_id" desc="Puts the short value located in vx into an instance field. The instance is referenced by vy." />
+<opcode hex="60" name="sget vx,field_id" desc="Reads the integer field identified by the field_id into vx." />
+<opcode hex="61" name="sget-wide vx, field_id" desc="Reads the static field identified by the field_id into vx and vx+1 registers." />
+<opcode hex="62" name="sget-object vx,field_id" desc="Reads the object reference field identified by the field_id into vx." />
+<opcode hex="63" name="sget-boolean vx,field_id" desc="Reads the boolean static field identified by the field_id into vx." />
+<opcode hex="64" name="sget-byte vx,field_id" desc="Reads the byte static field identified by the field_id into vx." />
+<opcode hex="65" name="sget-char vx,field_id" desc="Reads the char static field identified by the field_id into vx." />
+<opcode hex="66" name="sget-short vx,field_id" desc="Reads the short static field identified by the field_id into vx." />
+<opcode hex="67" name="sput vx, field_id" desc="Puts vx into a static field." />
+<opcode hex="68" name="sput-wide vx, field_id" desc="Puts vx and vx+1 into a static field." />
+<opcode hex="69" name="sput-object vx,field_id" desc="Puts object reference in vx into a static field." />
+<opcode hex="6A" name="sput-boolean vx,field_id" desc="Puts boolean value in vx into a static field." />
+<opcode hex="6B" name="sput-byte vx,field_id" desc="Puts byte value in vx into a static field." />
+<opcode hex="6C" name="sput-char vx,field_id" desc="Puts char value in vx into a static field." />
+<opcode hex="6D" name="sput-short vx,field_id" desc="Puts short value in vx into a static field." />
+<opcode hex="6E" name="invoke-virtual { parameters }, methodtocall" desc="Invokes a virtual method with parameters." />
+<opcode hex="6F" name="invoke-super {parameter},methodtocall" desc="Invokes the virtual method of the immediate parent class." />
+<opcode hex="70" name="invoke-direct { parameters }, methodtocall" desc="Invokes a method with parameters without the virtual method resolution." />
+<opcode hex="71" name="invoke-static {parameters}, methodtocall" desc="Invokes a static method with parameters." />
+<opcode hex="72" name="invoke-interface {parameters},methodtocall" desc="Invokes an interface method." />
+<opcode hex="74" name="invoke-virtual/range {vx..vy},methodtocall" desc="Invokes virtual method with a range of registers. The instruction specifies the first register and the number of registers to be passed to the method." />
+<opcode hex="75" name="invoke-super/range" desc="Invokes the virtual method of the immediate parent class. The instruction specifies the first register and the number of registers to be passed to the method." />
+<opcode hex="76" name="invoke-direct/range {vx..vy},methodtocall" desc="Invokes direct method with a range of registers. The instruction specifies the first register and the number of registers to be passed to the method." />
+<opcode hex="77" name="invoke-static/range {vx..vy},methodtocall" desc="Invokes static method with a range of registers. The instruction specifies the first register and the number of registers to be passed to the method." />
+<opcode hex="78" name="invoke-interface-range" desc="Invokes an interface method with a range of registers. The instruction specifies the first register and the number of registers to be passed to the method." />
+<opcode hex="7B" name="neg-int vx,vy" desc="Calculates vx=-vy." />
+<opcode hex="7D" name="neg-long vx,vy" desc="Calculates vx,vx+1=-(vy,vy+1)" />
+<opcode hex="7F" name="neg-float vx,vy" desc="Calculates vx=-vy" />
+<opcode hex="80" name="neg-double vx,vy" desc="Calculates vx,vx+1=-(vy,vy+1)" />
+<opcode hex="81" name="int-to-long vx, vy" desc="Converts the integer in vy into a long in vx,vx+1." />
+<opcode hex="82" name="int-to-float vx, vy" desc="Converts the integer in vx into a float in vx." />
+<opcode hex="83" name="int-to-double vx, vy" desc="Converts the integer in vy into the double in vx,vx+1." />
+<opcode hex="84" name="long-to-int vx,vy" desc="Converts the long value in vy,vy+1 into an integer in vx." />
+<opcode hex="85" name="long-to-float vx, vy" desc="Converts the long value in vy,vy+1 into a float in vx." />
+<opcode hex="86" name="long-to-double vx, vy" desc="Converts the long value in vy,vy+1 into a double value in vx,vx+1." />
+<opcode hex="87" name="float-to-int vx, vy" desc="Converts the float value in vy into an integer value in vx." />
+<opcode hex="88" name="float-to-long vx,vy" desc="Converts the float value in vy into a long value in vx." />
+<opcode hex="89" name="float-to-double vx, vy" desc="Converts the float value in vy into a double value in vx,vx+1." />
+<opcode hex="8A" name="double-to-int vx, vy" desc="Converts the double value in vy,vy+1 into an integer value in vx." />
+<opcode hex="8B" name="double-to-long vx, vy" desc="Converts the double value in vy,vy+1 into a long value in vx,vx+1." />
+<opcode hex="8C" name="double-to-float vx, vy" desc="Converts the double value in vy,vy+1 into a float value in vx." />
+<opcode hex="8D" name="int-to-byte vx,vy" desc="Converts the int value in vy to a byte value and stores it in vx." />
+<opcode hex="8E" name="int-to-char vx,vy" desc="Converts the int value in vy to a char value and stores it in vx." />
+<opcode hex="8F" name="int-to-short vx,vy" desc="Converts the int value in vy to a short value and stores it in vx." />
+<opcode hex="90" name="add-int vx,vy,vz" desc="Calculates vy+vz and puts the result into vx." />
+<opcode hex="91" name="sub-int vx,vy,vz" desc="Calculates vy-vz and puts the result into vx." />
+<opcode hex="92" name="mul-int vx, vy, vz" desc="Multiplies vz with wy and puts the result int vx." />
+<opcode hex="93" name="div-int vx,vy,vz" desc="Divides vy with vz and puts the result into vx." />
+<opcode hex="94" name="rem-int vx,vy,vz" desc="Calculates vy % vz and puts the result into vx." />
+<opcode hex="95" name="and-int vx, vy, vz" desc="Calculates vy AND vz and puts the result into vx." />
+<opcode hex="96" name="or-int vx, vy, vz" desc="Calculates vy OR vz and puts the result into vx." />
+<opcode hex="97" name="xor-int vx, vy, vz" desc="Calculates vy XOR vz and puts the result into vx." />
+<opcode hex="98" name="shl-int vx, vy, vz" desc="Shift vy left by the positions specified by vz and store the result into vx." />
+<opcode hex="99" name="shr-int vx, vy, vz" desc="Shift vy right by the positions specified by vz and store the result into vx." />
+<opcode hex="9A" name="ushr-int vx, vy, vz" desc="Unsigned shift right (&gt;&gt;&gt;) vy by the positions specified by vz and store the result into vx." />
+<opcode hex="9B" name="add-long vx, vy, vz" desc="Adds vy to vz and puts the result into vx1." />
+<opcode hex="9C" name="sub-long vx,vy,vz" desc="Calculates vy-vz and puts the result into vx1." />
+<opcode hex="9D" name="mul-long vx,vy,vz" desc="Calculates vy*vz and puts the result into vx1." />
+<opcode hex="9E" name="div-long vx, vy, vz" desc="Calculates vy/vz and puts the result into vx1." />
+<opcode hex="9F" name="rem-long vx,vy,vz" desc="Calculates vy % vz and puts the result into vx1." />
+<opcode hex="A0" name="and-long vx, vy, vz" desc="Calculates the vy AND vz and puts the result into vx1." />
+<opcode hex="A1" name="or-long vx, vy, vz" desc="Calculates the vy OR vz and puts the result into vx1." />
+<opcode hex="A2" name="xor-long vx, vy, vz" desc="Calculates the vy XOR vz and puts the result into vx1." />
+<opcode hex="A3" name="shl-long vx, vy, vz" desc="Shifts left vy by vz positions and stores the result in vx1." />
+<opcode hex="A4" name="shr-long vx,vy,vz" desc="Shifts right vy by vz positions and stores the result in vx1." />
+<opcode hex="A5" name="ushr-long vx, vy, vz" desc="Unsigned shifts right vy by vz positions and stores the result in vx1." />
+<opcode hex="A6" name="add-float vx,vy,vz" desc="Adds vy to vz and puts the result into vx." />
+<opcode hex="A7" name="sub-float vx,vy,vz" desc="Calculates vy-vz and puts the result into vx." />
+<opcode hex="A8" name="mul-float vx, vy, vz" desc="Multiplies vy with vz and puts the result into vx." />
+<opcode hex="A9" name="div-float vx, vy, vz" desc="Calculates vy/vz and puts the result into vx." />
+<opcode hex="AA" name="rem-float vx,vy,vz" desc="Calculates vy % vz and puts the result into vx." />
+<opcode hex="AB" name="add-double vx,vy,vz" desc="Adds vy to vz and puts the result into vx1." />
+<opcode hex="AC" name="sub-double vx,vy,vz" desc="Calculates vy-vz and puts the result into vx1." />
+<opcode hex="AD" name="mul-double vx, vy, vz" desc="Multiplies vy with vz and puts the result into vx1." />
+<opcode hex="AE" name="div-double vx, vy, vz" desc="Calculates vy/vz and puts the result into vx1." />
+<opcode hex="AF" name="rem-double vx,vy,vz" desc="Calculates vy % vz and puts the result into vx1." />
+<opcode hex="B0" name="add-int/2addr vx,vy" desc="Adds vy to vx." />
+<opcode hex="B1" name="sub-int/2addr vx,vy" desc="Calculates vx-vy and puts the result into vx." />
+<opcode hex="B2" name="mul-int/2addr vx,vy" desc="Multiplies vx with vy." />
+<opcode hex="B3" name="div-int/2addr vx,vy" desc="Divides vx with vy and puts the result into vx." />
+<opcode hex="B4" name="rem-int/2addr vx,vy" desc="Calculates vx % vy and puts the result into vx" />
+<opcode hex="B5" name="and-int/2addr vx, vy" desc="Calculates vx AND vy and puts the result into vx." />
+<opcode hex="B6" name="or-int/2addr vx, vy" desc="Calculates vx OR vy and puts the result into vx." />
+<opcode hex="B7" name="xor-int/2addr vx, vy" desc="Calculates vx XOR vy and puts the result into vx." />
+<opcode hex="B8" name="shl-int/2addr vx, vy" desc="Shifts vx left by vy positions." />
+<opcode hex="B9" name="shr-int/2addr vx, vy" desc="Shifts vx right by vy positions." />
+<opcode hex="BA" name="ushr-int/2addr vx, vy" desc="Unsigned shift right (&gt;&gt;&gt;) vx by the positions specified by vy." />
+<opcode hex="BB" name="add-long/2addr vx,vy" desc="Adds vy to vx1." />
+<opcode hex="BC" name="sub-long/2addr vx,vy" desc="Calculates vx-vy and puts the result into vx1." />
+<opcode hex="BD" name="mul-long/2addr vx,vy" desc="Calculates vx*vy and puts the result into vx1." />
+<opcode hex="BE" name="div-long/2addr vx, vy" desc="Calculates vx/vy and puts the result into vx1." />
+<opcode hex="BF" name="rem-long/2addr vx,vy" desc="Calculates vx % vy and puts the result into vx1." />
+<opcode hex="C0" name="and-long/2addr vx, vy" desc="Calculates vx AND vy and puts the result into vx1." />
+<opcode hex="C1" name="or-long/2addr vx, vy" desc="Calculates vx OR vy and puts the result into vx1." />
+<opcode hex="C2" name="xor-long/2addr vx, vy" desc="Calculates vx XOR vy and puts the result into vx1." />
+<opcode hex="C3" name="shl-long/2addr vx, vy" desc="Shifts left the value in vx,vx+1 by the positions specified by vy and stores the result in vx,vx+1." />
+<opcode hex="C4" name="shr-long/2addr vx, vy" desc="Shifts right the value in vx,vx+1 by the positions specified by vy and stores the result in vx,vx+1." />
+<opcode hex="C5" name="ushr-long/2addr vx, vy" desc="Unsigned shifts right the value in vx,vx+1 by the positions specified by vy and stores the result in vx,vx+1." />
+<opcode hex="C6" name="add-float/2addr vx,vy" desc="Adds vy to vx." />
+<opcode hex="C7" name="sub-float/2addr vx,vy" desc="Calculates vx-vy and stores the result in vx." />
+<opcode hex="C8" name="mul-float/2addr vx, vy" desc="Multiplies vx with vy." />
+<opcode hex="C9" name="div-float/2addr vx, vy" desc="Calculates vx/vy and puts the result into vx." />
+<opcode hex="CA" name="rem-float/2addr vx,vy" desc="Calculates vx/vy and puts the result into vx." />
+<opcode hex="CB" name="add-double/2addr vx, vy" desc="Adds vy to vx1." />
+<opcode hex="CC" name="sub-double/2addr vx, vy" desc="Calculates vx-vy and puts the result into vx1." />
+<opcode hex="CD" name="mul-double/2addr vx, vy" desc="Multiplies vx with vy1." />
+<opcode hex="CE" name="div-double/2addr vx, vy" desc="Calculates vx/vy and puts the result into vx1." />
+<opcode hex="CF" name="rem-double/2addr vx,vy" desc="Calculates vx % vy and puts the result into vx1." />
+<opcode hex="D0" name="add-int/lit16 vx,vy,lit16" desc="Adds vy to lit16 and stores the result into vx." />
+<opcode hex="D1" name="sub-int/lit16 vx,vy,lit16" desc="Calculates vy - lit16 and stores the result into vx." />
+<opcode hex="D2" name="mul-int/lit16 vx,vy,lit16" desc="Calculates vy * lit16 and stores the result into vx." />
+<opcode hex="D3" name="div-int/lit16 vx,vy,lit16" desc="Calculates vy / lit16 and stores the result into vx." />
+<opcode hex="D4" name="rem-int/lit16 vx,vy,lit16" desc="Calculates vy % lit16 and stores the result into vx." />
+<opcode hex="D5" name="and-int/lit16 vx,vy,lit16" desc="Calculates vy AND lit16 and stores the result into vx." />
+<opcode hex="D6" name="or-int/lit16 vx,vy,lit16" desc="Calculates vy OR lit16 and stores the result into vx." />
+<opcode hex="D7" name="xor-int/lit16 vx,vy,lit16" desc="Calculates vy XOR lit16 and stores the result into vx." />
+<opcode hex="D8" name="add-int/lit8 vx,vy,lit8" desc="Adds vy to lit8 and stores the result into vx." />
+<opcode hex="D9" name="sub-int/lit8 vx,vy,lit8" desc="Calculates vy-lit8 and stores the result into vx." />
+<opcode hex="DA" name="mul-int/lit8 vx,vy,lit8" desc="Multiplies vy with lit8 8-bit literal constant and puts the result into vx." />
+<opcode hex="DB" name="div-int/lit8 vx,vy,lit8" desc="Calculates vy/lit8 and stores the result into vx." />
+<opcode hex="DC" name="rem-int/lit8 vx,vy,lit8" desc="Calculates vy % lit8 and stores the result into vx." />
+<opcode hex="DD" name="and-int/lit8 vx,vy,lit8" desc="Calculates vy AND lit8 and stores the result into vx." />
+<opcode hex="DE" name="or-int/lit8 vx, vy, lit8" desc="Calculates vy OR lit8 and puts the result into vx." />
+<opcode hex="DF" name="xor-int/lit8 vx, vy, lit8" desc="Calculates vy XOR lit8 and puts the result into vx." />
+<opcode hex="E0" name="shl-int/lit8 vx, vy, lit8" desc="Shift v0 left by the bit positions specified by the literal constant and put the result into vx." />
+<opcode hex="E1" name="shr-int/lit8 vx, vy, lit8" desc="Shift v0 right by the bit positions specified by the literal constant and put the result into vx." />
+<opcode hex="E2" name="ushr-int/lit8 vx, vy, lit8" desc="Unsigned right shift of v0 (&gt;&gt;&gt;) by the bit positions specified by the literal constant and put the result into vx." />
+<opcode hex="EE" name="execute-inline {parameters},inline ID" desc="Executes the inline method identified by inline ID6." />
+<opcode hex="F0" name="invoke-direct-empty" desc="Stands as a placeholder for pruned empty methods like Object.&lt;init&gt;. This acts as nop during normal execution6." />
+<opcode hex="F2" name="iget-quick vx,vy,offset" desc="Gets the value stored at offset in vy instance's data area to vx6." />
+<opcode hex="F3" name="iget-wide-quick vx,vy,offset" desc="Gets the object reference value stored at offset in vy instance's data area to vx,vx+16." />
+<opcode hex="F4" name="iget-object-quick vx,vy,offset" desc="Gets the object reference value stored at offset in vy instance's data area to vx6." />
+<opcode hex="F5" name="iput-quick vx,vy,offset" desc="Puts the value stored in vx to offset in vy instance's data area6." />
+<opcode hex="F6" name="iput-wide-quick vx,vy,offset" desc="Puts the value stored in vx,vx+1 to offset in vy instance's data area6." />
+<opcode hex="F7" name="iput-object-quick vx,vy,offset" desc="Puts the object reference value stored in vx to offset in vy instance's data area to vx6." />
+<opcode hex="F8" name="invoke-virtual-quick {parameters},vtable offset" desc="Invokes a virtual method using the vtable of the target object6." />
+<opcode hex="F9" name="invoke-virtual-quick/range {parameter range},vtable offset" desc="Invokes a virtual method using the vtable of the target object6" />
+<opcode hex="FA" name="invoke-super-quick {parameters},vtable offset" desc="Invokes a virtual method in the target object's immediate parent class using the vtable of that parent class6." />
+<opcode hex="FB" name="invoke-super-quick/range {register range},vtable offset" desc="Invokes a virtual method in the target object's immediate parent class using the vtable of that parent class6." />
+</opcodes>
