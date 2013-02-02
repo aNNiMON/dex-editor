@@ -19,6 +19,7 @@ import android.util.Xml;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.*;
 
 public class ViewInflater {
@@ -54,6 +55,9 @@ public class ViewInflater {
                         evt = parse.next();
                         continue;
                     }
+                    if (!(v instanceof Button)) {
+                        v.setBackgroundResource(R.drawable.view_background);
+                    }
                     if (root == null) {
                         root = v;
                     } else {
@@ -79,29 +83,36 @@ public class ViewInflater {
         return root;
     }
 
+    @SuppressWarnings("deprecation")
     private View createView(XmlPullParser parse) {
         String name = parse.getName();
         View result = null;
         AttributeSet atts = Xml.asAttributeSet(parse);
         if (name.equals("LinearLayout")) {
             result = new LinearLayout(context);
+        } else if (name.equals("RelativeLayout")) {
+            result = new RelativeLayout(context);
+        } else if (name.equals("AbsoluteLayout")) {
+            result = new AbsoluteLayout(context);
+        } else if (name.equals("FrameLayout")) {
+            result = new FrameLayout(context);
+        } else if (name.equals("GridView")) {
+            result = new GridView(context);
+        } else if (name.endsWith("ListView")) {
+            result = new ListView(context);
         } else if (name.equals("RadioGroup")) {
             result = new RadioGroup(context);
+        } else if (name.equals("ScrollView")) {
+            result = new ScrollView(context);
         } else if (name.equals("TableRow")) {
             result = new TableRow(context);
         } else if (name.equals("TableLayout")) {
             result = new TableLayout(context);
-        } else if (name.equals("AbsoluteLayout")) {
-            result = new AbsoluteLayout(context);
-        } else if (name.equals("RelativeLayout")) {
-            result = new RelativeLayout(context);
-        } else if (name.equals("ScrollView")) {
-            result = new ScrollView(context);
-        } else if (name.equals("FrameLayout")) {
-            result = new FrameLayout(context);
-        } else if (name.equals("ListView")) {
-            result = new ListView(context);
-        } else if (name.equals("TextView")) {
+        } else if (name.equals("TabHost")) {
+            result = new TabHost(context);
+        }
+        
+        else if (name.equals("TextView")) {
             result = new TextView(context);
         } else if (name.equals("AutoCompleteTextView")) {
             result = new AutoCompleteTextView(context);
@@ -109,22 +120,28 @@ public class ViewInflater {
             result = new AnalogClock(context);
         } else if (name.equals("Button")) {
             result = new Button(context);
-//        } else if (name.equals("CalendarView")) {
-//            result = new CalendarView(context);
         } else if (name.equals("CheckBox")) {
             result = new CheckBox(context);
+        } else if (name.equals("CheckedTextView")) {
+            result = new CheckedTextView(context);
         } else if (name.equals("Chronometer")) {
             result = new Chronometer(context);
+        } else if (name.equals("CompoundButton")) {
+            result = new CompoundButton(context) {};
         } else if (name.equals("DatePicker")) {
             result = new DatePicker(context);
         } else if (name.equals("DigitalClock")) {
             result = new DigitalClock(context);
         } else if (name.equals("EditText")) {
             result = new EditText(context);
+        } else if (name.equals("Gallery")) {
+            result = new Gallery(context);
         } else if (name.equals("ImageButton")) {
             result = new ImageButton(context);
         } else if (name.equals("ImageView")) {
             result = new ImageView(context);
+        } else if (name.equals("HorizontalScrollView")) {
+            result = new HorizontalScrollView(context);
         } else if (name.equals("ProgressBar")) {
             result = new ProgressBar(context);
         } else if (name.equals("RadioButton")) {
@@ -137,6 +154,8 @@ public class ViewInflater {
             result = new Spinner(context);
         } else if (name.equals("TimePicker")) {
             result = new TimePicker(context);
+        } else if (name.equals("WebView")) {
+            result = new WebView(context);
         } else {
             Toast.makeText(context, "Unhandled tag:" + name, Toast.LENGTH_SHORT).show();
         }
@@ -256,8 +275,6 @@ public class ViewInflater {
             
         }
 
-        
-
         if (result instanceof ProgressBar) {
             ProgressBar pb = (ProgressBar) result;
             
@@ -277,6 +294,36 @@ public class ViewInflater {
             }
         }
         
+        if (result instanceof GridView) {
+            GridView gv = (GridView) result;
+            
+            String columnWidth = findAttribute(atts, "android:columnWidth");
+            if (columnWidth != null) {
+                gv.setColumnWidth(readSize(columnWidth));
+            }
+            
+            String numColumns = findAttribute(atts, "android:numColumns");
+            if (numColumns != null) {
+                int value;
+                try {
+                    value = Integer.parseInt(numColumns);
+                } catch (NumberFormatException nfe) {
+                    value = -1; // auto_fit
+                }
+                gv.setNumColumns(value);
+            }
+            
+            String stretchMode = findAttribute(atts, "android:stretchMode");
+            if (stretchMode != null) {
+                int value;
+                try {
+                    value = Integer.parseInt(stretchMode);
+                    gv.setStretchMode(value);
+                } catch (NumberFormatException nfe) {
+                    // do_nothing
+                }
+            }
+        }
 
         if (result instanceof LinearLayout) {
             LinearLayout ll = (LinearLayout) result;
@@ -359,8 +406,11 @@ public class ViewInflater {
         return name.endsWith("Layout")
                 || name.equals("RadioGroup")
                 || name.equals("TableRow")
-                || name.equals("ScrollView")
-                || name.equals("ListView");
+                || name.equals("TabHost")
+                || name.equals("GridView")
+                || name.equals("Gallery")
+                || name.endsWith("ScrollView")
+                || name.endsWith("ListView");
     }
 
     private int lookupId(String id) {
@@ -391,6 +441,7 @@ public class ViewInflater {
         }
     }
 
+    @SuppressWarnings("deprecation")
     private ViewGroup.LayoutParams loadLayoutParams(AttributeSet atts, ViewGroup vg) {
         ViewGroup.LayoutParams lps = null;
 
